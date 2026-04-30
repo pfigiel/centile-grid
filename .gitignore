@@ -1,10 +1,14 @@
 # dependencies
 node_modules/
 
+# Expo
+.expo/
+
 # debug
 npm-debug.*
 yarn-debug.*
 yarn-error.*
+pnpm-debug.log*
 
 # macOS
 .DS_Store
