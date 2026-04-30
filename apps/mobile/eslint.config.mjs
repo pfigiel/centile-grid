@@ -7,6 +7,7 @@ export default defineConfig([
   expoConfig,
   prettierConfig,
   {
+    files: ['**/*.ts', '**/*.tsx', '**/*.d.ts'],
     plugins: { 'prefer-arrow': preferArrow },
     rules: {
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
