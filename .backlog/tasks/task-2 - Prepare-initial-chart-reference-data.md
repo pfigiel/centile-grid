@@ -1,9 +1,10 @@
 ---
 id: TASK-2
-title: Prepare chart reference data
+title: Prepare initial chart reference data
 status: To Do
 assignee: []
 created_date: '2026-04-30 09:58'
+updated_date: '2026-04-30 10:56'
 labels: []
 dependencies: []
 ---
@@ -28,5 +29,7 @@ There should be separate CSV file for each chart. Each chart will consist of a m
 - c97
 
 where "c\*" is the centile value for given age.
+
+For now only prepare data for height, more datasets will be added later.
 
 <!-- SECTION:DESCRIPTION:END -->
