@@ -1,11 +1,14 @@
 {
   "name": "centile-grid",
   "version": "0.1.0",
-  "description": "",
+  "description": "Child growth chart app for pediatrician and parents",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "backlog": "npm exec backlog browser"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "backlog.md": "1.44.0"
+  }
 }
