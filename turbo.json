@@ -3,6 +3,7 @@
   "tasks": {
     "build": { "dependsOn": ["^build"], "outputs": [".expo/**", "dist/**"] },
     "lint": { "outputs": [] },
-    "typecheck": { "outputs": [] }
+    "typecheck": { "outputs": [] },
+    "test": { "outputs": [] }
   }
 }
