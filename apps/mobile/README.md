@@ -1,6 +1,6 @@
-# centile-grid
+# @centile-grid/mobile
 
-Child growth chart app for pediatricians and parents.
+Expo React Native app for tracking child growth against OLAF+OLA centile charts. Targets pediatricians and parents.
 
 ## Prerequisites
 
@@ -10,14 +10,18 @@ Child growth chart app for pediatricians and parents.
 
 ## Installation
 
+Run from the **monorepo root**:
+
 ```bash
-npm install
+pnpm install
 ```
 
 ## Running the app
 
-| Command | Platform |
-|---|---|
-| `npm start` | Opens Metro bundler — scan QR code with [Expo Go](https://expo.dev/go) on a physical device |
-| `npm run ios` | Opens on iOS Simulator |
-| `npm run android` | Opens on Android emulator |
+From this directory (`apps/mobile`):
+
+| Command        | Platform                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| `pnpm start`   | Opens Metro bundler — scan QR code with [Expo Go](https://expo.dev/go) on a physical device |
+| `pnpm ios`     | Opens on iOS Simulator                                                                      |
+| `pnpm android` | Opens on Android emulator                                                                   |
