@@ -1,0 +1,10 @@
+{
+  "name": "@centile-grid/ui-kit-mobile",
+  "version": "0.1.0",
+  "main": "src/index.ts",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*",
+    "react-native-paper": "*"
+  }
+}
