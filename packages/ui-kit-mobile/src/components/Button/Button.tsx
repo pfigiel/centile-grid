@@ -1,11 +1,11 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import { Button as RNPButton } from 'react-native-paper';
 
 type ButtonProps = {
-  children: React.ReactNode;
+  children: ReactNode;
+  onPress?: () => void;
 };
 
-const Button = ({ children }: ButtonProps) => <RNPButton>{children}</RNPButton>;
-
-export { Button };
-export type { ButtonProps };
+export const Button = ({ children, onPress }: ButtonProps) => (
+  <RNPButton onPress={onPress}>{children}</RNPButton>
+);

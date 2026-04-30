@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Button } from '@centile-grid/ui-kit-mobile';
+import { StyleSheet, View } from 'react-native';
 
 const HomeScreen = () => (
   <View style={styles.container}>
-    <Text>Hello world</Text>
+    <Button>Hello world</Button>
   </View>
 );
 
