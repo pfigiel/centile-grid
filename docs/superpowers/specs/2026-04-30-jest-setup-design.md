@@ -13,10 +13,10 @@ centile-grid/
   turbo.json              ← add "test" task
   .husky/pre-push         ← new: runs pnpm test
   apps/mobile/
-    jest.config.js        ← new: jest-expo preset
+    jest.config.mjs       ← new: jest-expo preset
     package.json          ← add devDeps + "test" script
   packages/ui-kit-mobile/
-    jest.config.js        ← new: jest-expo preset
+    jest.config.mjs       ← new: jest-expo preset
     package.json          ← add devDeps + "test" script
     src/components/Button/
       Button.test.tsx     ← new: basic test suite
@@ -33,10 +33,10 @@ Both packages install the same devDependencies:
 
 ## Jest Configuration
 
-Each package gets a minimal `jest.config.js`:
+Each package gets a minimal `jest.config.mjs`:
 
 ```js
-module.exports = { preset: 'jest-expo' };
+export default { preset: 'jest-expo' };
 ```
 
 No additional transform configuration needed; `jest-expo` handles everything.
