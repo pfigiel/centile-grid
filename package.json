@@ -1,7 +1,7 @@
 {
   "name": "centile-grid",
   "main": "expo-router/entry",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -18,7 +18,6 @@
     "@react-navigation/bottom-tabs": "7.4.0",
     "@react-navigation/elements": "2.6.3",
     "@react-navigation/native": "7.2.2",
-    "backlog.md": "1.44.0",
     "expo": "54.0.33",
     "expo-constants": "18.0.13",
     "expo-font": "14.0.11",
@@ -43,6 +42,7 @@
   },
   "devDependencies": {
     "@types/react": "19.1.0",
+    "backlog.md": "1.44.0",
     "eslint": "9.25.0",
     "eslint-config-expo": "10.0.0",
     "eslint-config-prettier": "10.1.8",
@@ -51,15 +51,6 @@
     "lint-staged": "16.4.0",
     "prettier": "3.8.3",
     "typescript": "5.9.2"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{json,md}": [
-      "prettier --write"
-    ]
   },
   "private": true
 }

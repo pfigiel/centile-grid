@@ -1,4 +1,3 @@
-// https://docs.expo.dev/guides/using-eslint/
 import expoConfig from 'eslint-config-expo/flat.js';
 import prettierConfig from 'eslint-config-prettier';
 import preferArrow from 'eslint-plugin-prefer-arrow';
