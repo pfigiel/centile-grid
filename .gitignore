@@ -1,9 +1,6 @@
 # dependencies
 node_modules/
 
-# Expo
-.expo/
-
 # debug
 npm-debug.*
 yarn-debug.*
