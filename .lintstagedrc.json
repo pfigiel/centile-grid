@@ -1,4 +1,7 @@
 {
-  "apps/mobile/**/*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+  "apps/mobile/**/*.{js,jsx,ts,tsx}": [
+    "eslint --config apps/mobile/eslint.config.mjs --fix",
+    "prettier --write"
+  ],
   "**/*.{json,md}": ["prettier --write"]
 }

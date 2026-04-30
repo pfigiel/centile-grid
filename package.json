@@ -2,6 +2,7 @@
   "name": "centile-grid",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.13.1",
   "scripts": {
     "build": "turbo build",
     "lint": "turbo lint",
