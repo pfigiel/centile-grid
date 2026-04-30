@@ -14,15 +14,17 @@ centile-grid/
 ├── apps/
 │   └── mobile/                  ← all current app files moved here
 ├── packages/                    ← empty, ready for future shared code
-├── package.json                 ← workspace root (turbo devDep, no main)
+├── package.json                 ← workspace root (turbo + husky + lint-staged devDeps)
 ├── pnpm-workspace.yaml          ← declares apps/* and packages/*
 ├── turbo.json                   ← task pipeline: build, lint, test
 ├── .npmrc                       ← node-linker=hoisted (required for Expo + pnpm)
+├── .husky/                      ← stays at root (git hooks are always repo-level)
+├── .lintstagedrc.json           ← stays at root, scoped per-app via glob patterns
 ├── .gitignore
 └── README.md
 ```
 
-All current files (`app/`, `app.json`, `package.json`, `tsconfig.json`, `eslint.config.mjs`, `.husky/`, `.lintstagedrc.json`, etc.) move into `apps/mobile/`.
+All current app files (`app/`, `app.json`, `package.json`, `tsconfig.json`, `eslint.config.mjs`, etc.) move into `apps/mobile/`. `.husky/` and `.lintstagedrc.json` stay at the repo root — git hooks are always repo-level, and lint-staged uses per-glob rules to scope behaviour per app.
 
 ## Key Configuration
 
@@ -93,9 +95,10 @@ module.exports = config;
 7. Add `metro.config.js` in `apps/mobile/`
 8. Update `apps/mobile/package.json` — set `name` to `@centile-grid/mobile`
 9. Update `.gitignore` at root (adjust paths as needed)
-10. Ensure `.husky/` hooks work from the repo root
-11. Run `pnpm install` from root
-12. Verify `pnpm --filter @centile-grid/mobile start` launches the Expo dev server
+10. Update `.lintstagedrc.json` glob patterns to prefix `apps/mobile/` (e.g. `apps/mobile/**/*.{ts,tsx}`)
+11. Move husky + lint-staged devDeps to root `package.json`; remove them from `apps/mobile/package.json`
+12. Run `pnpm install` from root
+13. Verify `pnpm --filter @centile-grid/mobile start` launches the Expo dev server
 
 ## Decisions
 
