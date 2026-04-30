@@ -3,5 +3,9 @@
     "eslint --config apps/mobile/eslint.config.mjs --fix",
     "prettier --write"
   ],
+  "packages/ui-kit-mobile/**/*.{ts,tsx}": [
+    "eslint --config apps/mobile/eslint.config.mjs --fix",
+    "prettier --write"
+  ],
   "**/*.{json,md}": ["prettier --write"]
 }
