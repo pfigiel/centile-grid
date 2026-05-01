@@ -1,9 +1,9 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { fireEvent, render } from '@testing-library/react-native';
+import React, { ReactElement } from 'react';
 import { PaperProvider } from 'react-native-paper';
 import { Button } from './Button';
 
-const renderWithProvider = (ui: React.ReactElement) => render(<PaperProvider>{ui}</PaperProvider>);
+const renderWithProvider = (ui: ReactElement) => render(<PaperProvider>{ui}</PaperProvider>);
 
 describe('Button', () => {
   it('renders children', () => {
