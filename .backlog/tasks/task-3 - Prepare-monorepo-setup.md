@@ -1,11 +1,13 @@
 ---
 id: TASK-3
 title: Prepare monorepo setup
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-04-30 10:51'
+updated_date: '2026-05-01 10:57'
 labels: []
 dependencies: []
+ordinal: 3000
 ---
 
 ## Description

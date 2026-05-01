@@ -1,13 +1,13 @@
 ---
 id: TASK-4
 title: Add ui-kit-mobile package
-status: In Progress
+status: Done
 assignee: []
 created_date: '2026-04-30 17:11'
-updated_date: '2026-04-30 17:11'
+updated_date: '2026-05-01 10:57'
 labels: []
 dependencies: []
-ordinal: 1000
+ordinal: 2000
 ---
 
 ## Description
