@@ -1,3 +1,24 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+
+catalog:
+  typescript: 5.9.2
+
+catalogs:
+  react:
+    '@types/react': 19.1.0
+    react: 19.1.0
+    react-dom: 19.1.0
+    react-test-renderer: 19.1.0
+
+  lint:
+    eslint: 9.25.0
+    eslint-config-prettier: 10.1.8
+    eslint-plugin-prefer-arrow: 1.2.3
+
+  test:
+    '@testing-library/react-native': 13.3.3
+    '@types/jest': 29.5.14
+    jest: 29.7.0
+    jest-expo: 54.0.17
