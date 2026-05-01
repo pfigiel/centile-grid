@@ -9,6 +9,9 @@
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests"
   },
+  "dependencies": {
+    "@gorhom/bottom-sheet": "^5.2.13"
+  },
   "peerDependencies": {
     "react": ">=19.0.0",
     "react-native": ">=0.81.0",
