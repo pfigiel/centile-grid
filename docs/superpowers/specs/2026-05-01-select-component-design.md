@@ -17,9 +17,9 @@ A generic, publicly exported wrapper around `@gorhom/bottom-sheet`'s `BottomShee
 
 ```ts
 type Props = {
+  children: ReactNode;
   isOpen: boolean;
   onClose: () => void;
-  children: ReactNode;
 };
 ```
 
@@ -56,7 +56,7 @@ type Props<T extends string> = {
 - **No value selected:** Outlined box with `label` rendered as placeholder text inside. Chevron (▼) on the right.
 - **Value selected:** Label floats above the top border (positioned via absolute layout over the border). Value text rendered inside using `renderValue` or raw string. Chevron on the right.
 - **No label prop:** No floating label; value displayed inside the box without a floating element.
-- Label position is purely conditional on whether `value` is set — no animation.
+- Label animates between two states using `react-native-reanimated`: when no value is set the label sits inside the box at full size (placeholder position); when a value is set the label slides up above the border and shrinks (floating position). The animation mirrors RNP's TextInput outlined label behaviour.
 
 ### Bottom sheet item list
 
