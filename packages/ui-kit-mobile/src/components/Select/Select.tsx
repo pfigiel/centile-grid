@@ -34,14 +34,14 @@ export const Select = <T extends string>({
 
   useEffect(() => {
     progress.value = withTiming(value !== undefined ? 1 : 0, { duration: 150 });
-    // `progress` is a Reanimated SharedValue — stable ref, never changes identity
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+  }, [progress, value]);
 
   const animatedLabelStyle = useAnimatedStyle(() => ({
     top: interpolate(progress.value, [0, 1], [LABEL_TOP_EMPTY, LABEL_TOP_FILLED]),
     fontSize: interpolate(progress.value, [0, 1], [LABEL_SIZE_EMPTY, LABEL_SIZE_FILLED]),
   }));
+
+  const handleTogglePress = () => setIsOpen(true);
 
   const handleSelect = (item: T) => {
     onSelect?.(item);
@@ -52,7 +52,7 @@ export const Select = <T extends string>({
 
   return (
     <View style={styles.container}>
-      <Pressable role="combobox" style={styles.toggle} onPress={() => setIsOpen(true)}>
+      <Pressable role="combobox" style={styles.toggle} onPress={handleTogglePress}>
         {label && <Animated.Text style={[styles.label, animatedLabelStyle]}>{label}</Animated.Text>}
         {value !== undefined && (
           <View style={styles.value}>
@@ -61,7 +61,6 @@ export const Select = <T extends string>({
         )}
         <Text style={styles.chevron}>▼</Text>
       </Pressable>
-
       <BottomSheetModal isOpen={isOpen} onClose={handleClose}>
         <BottomSheetScrollView>
           {label && <Text style={styles.sheetHeader}>{label}</Text>}
