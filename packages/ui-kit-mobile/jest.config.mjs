@@ -1,7 +1,3 @@
-import { createRequire } from 'module';
-
-const require = createRequire(import.meta.url);
-
 export default {
   preset: 'jest-expo',
   transformIgnorePatterns: [
@@ -9,7 +5,7 @@ export default {
     '/node_modules/react-native-reanimated/plugin/',
   ],
   moduleNameMapper: {
-    '^react-native-reanimated$': require.resolve('react-native-reanimated/mock'),
-    '^react-native-reanimated/(.+)': require.resolve('react-native-reanimated/mock'),
+    '^react-native-reanimated$': '<rootDir>/src/__mocks__/react-native-reanimated.ts',
+    '^react-native-reanimated/(.+)': '<rootDir>/src/__mocks__/react-native-reanimated.ts',
   },
 };
