@@ -10,7 +10,7 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
-    "@gorhom/bottom-sheet": "^5.2.13"
+    "@gorhom/bottom-sheet": "5.2.13"
   },
   "peerDependencies": {
     "react": ">=19.0.0",

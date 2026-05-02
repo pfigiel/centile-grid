@@ -4,6 +4,7 @@
     "build": { "outputs": [".expo/**", "dist/**"] },
     "lint": { "outputs": [] },
     "typecheck": { "outputs": [] },
-    "test": { "outputs": [] }
+    "test": { "outputs": [] },
+    "clean": { "cache": false }
   }
 }

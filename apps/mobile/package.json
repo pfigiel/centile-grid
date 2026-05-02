@@ -3,13 +3,14 @@
   "main": "expo-router/entry",
   "version": "0.1.0",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "expo start --clear",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "clean": "rm -rf .expo dist"
   },
   "dependencies": {
     "@centile-grid/ui-kit-mobile": "workspace:*",

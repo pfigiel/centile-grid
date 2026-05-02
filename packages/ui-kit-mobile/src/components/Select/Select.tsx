@@ -1,3 +1,4 @@
+import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { ReactNode, useEffect, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
@@ -6,8 +7,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { BottomSheet } from '../BottomSheet';
+import { BottomSheetModal } from '../BottomSheetModal';
 
 type Props<T extends string> = {
   value?: T;
@@ -48,6 +48,8 @@ export const Select = <T extends string>({
     setIsOpen(false);
   };
 
+  const handleClose = () => setIsOpen(false);
+
   return (
     <View style={styles.container}>
       <Pressable role="combobox" style={styles.toggle} onPress={() => setIsOpen(true)}>
@@ -60,7 +62,7 @@ export const Select = <T extends string>({
         <Text style={styles.chevron}>▼</Text>
       </Pressable>
 
-      <BottomSheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <BottomSheetModal isOpen={isOpen} onClose={handleClose}>
         <BottomSheetScrollView>
           {label && <Text style={styles.sheetHeader}>{label}</Text>}
           {options.map((option) => (
@@ -71,13 +73,13 @@ export const Select = <T extends string>({
               onPress={() => handleSelect(option)}
             >
               <View style={styles.optionContent}>
-                {renderValue ? renderValue(option) : <Text>{option}</Text>}
+                {renderValue?.(option) ?? <Text>{option}</Text>}
               </View>
               {value === option && <Text style={styles.checkmark}>✓</Text>}
             </Pressable>
           ))}
         </BottomSheetScrollView>
-      </BottomSheet>
+      </BottomSheetModal>
     </View>
   );
 };
