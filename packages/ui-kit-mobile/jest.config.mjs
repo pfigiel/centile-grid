@@ -1,1 +1,4 @@
-export default { preset: 'jest-expo' };
+export default {
+  preset: 'jest-expo',
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.js'],
+};

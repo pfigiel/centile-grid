@@ -10,6 +10,7 @@
     "test": "turbo test",
     "format": "prettier --write .",
     "backlog": "pnpm exec backlog browser",
+    "clean": "turbo clean && rm -rf .turbo node_modules",
     "prepare": "husky"
   },
   "devDependencies": {
