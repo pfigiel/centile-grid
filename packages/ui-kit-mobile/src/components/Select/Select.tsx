@@ -34,7 +34,8 @@ export const Select = <T extends string>({
 
   useEffect(() => {
     progress.value = withTiming(value !== undefined ? 1 : 0, { duration: 150 });
-  }, [value, progress]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   const animatedLabelStyle = useAnimatedStyle(() => ({
     top: interpolate(progress.value, [0, 1], [LABEL_TOP_EMPTY, LABEL_TOP_FILLED]),
@@ -51,7 +52,9 @@ export const Select = <T extends string>({
       <Pressable role="combobox" style={styles.toggle} onPress={() => setIsOpen(true)}>
         {label && <Animated.Text style={[styles.label, animatedLabelStyle]}>{label}</Animated.Text>}
         {value !== undefined && (
-          <Text style={styles.value}>{renderValue ? renderValue(value) : value}</Text>
+          <View style={styles.value}>
+            {renderValue ? renderValue(value) : <Text>{value}</Text>}
+          </View>
         )}
         <Text style={styles.chevron}>▼</Text>
       </Pressable>
@@ -66,7 +69,9 @@ export const Select = <T extends string>({
               style={styles.item}
               onPress={() => handleSelect(option)}
             >
-              <Text>{renderValue ? renderValue(option) : option}</Text>
+              <View style={styles.optionContent}>
+                {renderValue ? renderValue(option) : <Text>{option}</Text>}
+              </View>
               {value === option && <Text style={styles.checkmark}>✓</Text>}
             </Pressable>
           ))}
@@ -98,8 +103,10 @@ const styles = StyleSheet.create({
     color: '#86868b',
   },
   value: {
-    fontSize: 16,
-    color: '#000',
+    justifyContent: 'center',
+  },
+  optionContent: {
+    flex: 1,
   },
   chevron: {
     position: 'absolute',
