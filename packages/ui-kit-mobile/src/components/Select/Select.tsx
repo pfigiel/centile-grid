@@ -34,6 +34,7 @@ export const Select = <T extends string>({
 
   useEffect(() => {
     progress.value = withTiming(value !== undefined ? 1 : 0, { duration: 150 });
+    // `progress` is a Reanimated SharedValue — stable ref, never changes identity
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
