@@ -1,14 +1,14 @@
 ---
 id: TASK-6
 title: Create Select component
-status: In Progress
+status: Done
 assignee: []
 created_date: '2026-05-01 10:57'
-updated_date: '2026-05-01 10:57'
+updated_date: '2026-05-03 17:56'
 labels:
   - ui-kit-mobile
 dependencies: []
-ordinal: 2000
+ordinal: 5000
 ---
 
 ## Description
