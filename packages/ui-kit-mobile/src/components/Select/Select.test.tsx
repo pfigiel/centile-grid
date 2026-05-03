@@ -101,4 +101,20 @@ describe('Select', () => {
 
     expect(await screen.findByText('✓')).toBeOnTheScreen();
   });
+
+  it('should not open bottom sheet when disabled and toggle is pressed', async () => {
+    renderComponent({ disabled: true });
+
+    await userEvent.press(await screen.findByRole('combobox'));
+
+    expect(screen.queryByRole('option')).not.toBeOnTheScreen();
+  });
+
+  it('should apply reduced opacity styling when disabled', async () => {
+    renderComponent({ disabled: true });
+
+    const toggle = await screen.findByRole('combobox');
+
+    expect(toggle).toHaveStyle({ opacity: 0.38 });
+  });
 });

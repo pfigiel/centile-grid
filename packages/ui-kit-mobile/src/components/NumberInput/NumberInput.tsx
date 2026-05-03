@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
+import { StyleProp, TextStyle } from 'react-native';
 import { TextInput } from '../TextInput';
 
 type Props = {
+  style?: StyleProp<TextStyle>;
   label?: string;
-  value?: number;
+  value?: string | string[] | number;
   onChangeValue?: (value: number | undefined) => void;
 };
 
-export const NumberInput = ({ label, value, onChangeValue }: Props) => {
+export const NumberInput = ({ style, label, value, onChangeValue }: Props) => {
   const [stringValue, setStringValue] = useState(String(value ?? ''));
 
   useEffect(() => {
@@ -33,6 +35,7 @@ export const NumberInput = ({ label, value, onChangeValue }: Props) => {
 
   return (
     <TextInput
+      style={style}
       label={label}
       value={stringValue}
       onChangeText={handleChangeText}

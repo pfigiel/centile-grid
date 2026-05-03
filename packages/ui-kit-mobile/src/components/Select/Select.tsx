@@ -15,10 +15,11 @@ type Props<T extends string> = {
   label?: string;
   renderValue?: (value: T) => ReactNode;
   onSelect?: (value: T) => void;
+  disabled?: boolean;
 };
 
-const LABEL_TOP_EMPTY = 16;
-const LABEL_TOP_FILLED = -10;
+const LABEL_TOP_EMPTY = 20;
+const LABEL_TOP_FILLED = 8;
 const LABEL_SIZE_EMPTY = 16;
 const LABEL_SIZE_FILLED = 12;
 
@@ -28,6 +29,7 @@ export const Select = <T extends string>({
   label,
   renderValue,
   onSelect,
+  disabled,
 }: Props<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const progress = useSharedValue(value !== undefined ? 1 : 0);
@@ -41,7 +43,7 @@ export const Select = <T extends string>({
     fontSize: interpolate(progress.value, [0, 1], [LABEL_SIZE_EMPTY, LABEL_SIZE_FILLED]),
   }));
 
-  const handleTogglePress = () => setIsOpen(true);
+  const handleTogglePress = () => !disabled && setIsOpen(true);
 
   const handleSelect = (item: T) => {
     onSelect?.(item);
@@ -52,7 +54,11 @@ export const Select = <T extends string>({
 
   return (
     <View style={styles.container}>
-      <Pressable role="combobox" style={styles.toggle} onPress={handleTogglePress}>
+      <Pressable
+        role="combobox"
+        style={[styles.toggle, disabled && styles.disabled]}
+        onPress={handleTogglePress}
+      >
         {label && <Animated.Text style={[styles.label, animatedLabelStyle]}>{label}</Animated.Text>}
         {value !== undefined && (
           <View style={styles.value}>
@@ -72,7 +78,7 @@ export const Select = <T extends string>({
               onPress={() => handleSelect(option)}
             >
               <View style={styles.optionContent}>
-                {renderValue?.(option) ?? <Text>{option}</Text>}
+                {<Text>{renderValue?.(option) ?? option}</Text>}
               </View>
               {value === option && <Text style={styles.checkmark}>✓</Text>}
             </Pressable>
@@ -85,24 +91,26 @@ export const Select = <T extends string>({
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 12,
+    marginTop: 8,
+    width: '100%',
   },
   toggle: {
-    borderWidth: 2,
-    borderColor: '#86868b',
-    borderRadius: 6,
-    minHeight: 52,
-    paddingVertical: 14,
-    paddingHorizontal: 14,
+    backgroundColor: 'rgba(231, 224, 236, 1)',
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(73, 69, 79, 1)',
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    minHeight: 56,
+    paddingTop: 28,
+    paddingBottom: 8,
+    paddingHorizontal: 12,
     paddingRight: 44,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   label: {
     position: 'absolute',
-    left: 10,
-    backgroundColor: 'white',
-    paddingHorizontal: 4,
-    color: '#86868b',
+    left: 12,
+    color: 'rgba(73, 69, 79, 1)',
   },
   value: {
     justifyContent: 'center',
@@ -113,8 +121,8 @@ const styles = StyleSheet.create({
   chevron: {
     position: 'absolute',
     right: 12,
-    top: 16,
-    color: '#86868b',
+    top: 18,
+    color: 'rgba(73, 69, 79, 1)',
     fontSize: 12,
   },
   sheetHeader: {
@@ -134,5 +142,8 @@ const styles = StyleSheet.create({
   checkmark: {
     color: '#0a84ff',
     fontSize: 14,
+  },
+  disabled: {
+    opacity: 0.38,
   },
 });

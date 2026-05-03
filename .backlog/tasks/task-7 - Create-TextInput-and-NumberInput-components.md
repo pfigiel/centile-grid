@@ -1,14 +1,14 @@
 ---
 id: TASK-7
 title: Create TextInput and NumberInput components
-status: In Progress
+status: Done
 assignee: []
 created_date: '2026-05-03 11:15'
-updated_date: '2026-05-03 11:16'
+updated_date: '2026-05-03 17:56'
 labels:
   - ui-kit-mobile
 dependencies: []
-ordinal: 1000
+ordinal: 6000
 ---
 
 ## Description

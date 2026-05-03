@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react-native';
+import { render, screen, userEvent } from '@testing-library/react-native';
 import { ComponentProps } from 'react';
 import { PaperProvider } from 'react-native-paper';
 import { TextInput } from './TextInput';
@@ -11,20 +11,30 @@ describe('TextInput', () => {
       </PaperProvider>,
     );
 
-  it('should render label when label prop provided', () => {
-    const { getAllByText } = renderComponent({ label: 'Name' });
-    expect(getAllByText('Name')).not.toHaveLength(0);
+  it('should render label when label prop provided', async () => {
+    renderComponent({ label: 'Name' });
+
+    expect(await screen.findAllByText('Name')).toHaveLength(2);
   });
 
-  it('should render value when value prop provided', () => {
-    const { getByDisplayValue } = renderComponent({ value: 'John' });
-    expect(getByDisplayValue('John')).toBeTruthy();
+  it('should render value when value prop provided', async () => {
+    renderComponent({ value: 'John' });
+
+    expect(await screen.findByDisplayValue('John')).toBeOnTheScreen();
   });
 
-  it('should call onChangeText when text changes', () => {
+  it('should call onChangeText when text changes', async () => {
     const onChangeText = jest.fn();
-    const { getByDisplayValue } = renderComponent({ value: 'initial', onChangeText });
-    fireEvent.changeText(getByDisplayValue('initial'), 'updated');
-    expect(onChangeText).toHaveBeenCalledWith('updated');
+    renderComponent({ onChangeText });
+
+    await userEvent.type(await screen.findByDisplayValue(''), 'updated');
+
+    expect(onChangeText).toHaveBeenLastCalledWith('updated');
+  });
+
+  it('should apply style when style prop provided', async () => {
+    renderComponent({ style: { fontSize: 24 } });
+
+    expect(await screen.findByDisplayValue('')).toHaveStyle({ fontSize: 24 });
   });
 });
