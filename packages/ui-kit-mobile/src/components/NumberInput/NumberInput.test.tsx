@@ -13,7 +13,7 @@ describe('NumberInput', () => {
 
   it('should render label when label prop provided', () => {
     const { getAllByText } = renderComponent({ label: 'Weight' });
-    expect(getAllByText('Weight').length).toBeGreaterThan(0);
+    expect(getAllByText('Weight')).not.toHaveLength(0);
   });
 
   it('should call onChangeValue with parsed number when text changes', () => {

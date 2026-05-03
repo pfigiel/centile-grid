@@ -13,7 +13,7 @@ describe('TextInput', () => {
 
   it('should render label when label prop provided', () => {
     const { getAllByText } = renderComponent({ label: 'Name' });
-    expect(getAllByText('Name').length).toBeGreaterThan(0);
+    expect(getAllByText('Name')).not.toHaveLength(0);
   });
 
   it('should render value when value prop provided', () => {
