@@ -10,7 +10,9 @@
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests",
-    "clean": "rm -rf .expo dist"
+    "clean": "rm -rf .expo dist",
+    "build:dev:ios": "eas build --profile development --platform ios",
+    "build:dev:android": "eas build --profile development --platform android"
   },
   "dependencies": {
     "@centile-grid/ui-kit-mobile": "workspace:*",
@@ -20,6 +22,7 @@
     "@react-navigation/native": "7.2.2",
     "expo": "54.0.33",
     "expo-constants": "18.0.13",
+    "expo-dev-client": "55.0.30",
     "expo-font": "14.0.11",
     "expo-haptics": "15.0.8",
     "expo-image": "3.0.11",
