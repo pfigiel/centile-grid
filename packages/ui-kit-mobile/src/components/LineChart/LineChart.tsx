@@ -1,20 +1,20 @@
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
-import { CartesianChart, Line, Scatter } from 'victory-native';
+import { CartesianChart, Line, Scatter, type PointsArray } from 'victory-native';
 
-type DataPoint = { x: number; y: number };
+export type DataPoint = { x: number; y: number };
 
-type LineSeries = {
+export type LineSeries = {
   data: DataPoint[];
   color?: string;
   label?: string;
 };
 
-type ScatterSeries = {
+export type ScatterSeries = {
   data: DataPoint[];
   color?: string;
 };
 
-type Props = {
+export type Props = {
   lineSeries: LineSeries[];
   scatterSeries?: ScatterSeries;
   xLabel?: string;
@@ -67,7 +67,7 @@ export const LineChart = ({ lineSeries, scatterSeries, xLabel, yLabel, style }: 
         {yLabel !== undefined && <Text style={styles.yLabel}>{yLabel}</Text>}
         <View style={styles.chartArea}>
           <CartesianChart data={data as any} xKey={'x' as never} yKeys={yKeys as any}>
-            {({ points }: any) => (
+            {({ points }: { points: Record<string, PointsArray> }) => (
               <>
                 {lineYKeys.map((key, i) => (
                   <Line

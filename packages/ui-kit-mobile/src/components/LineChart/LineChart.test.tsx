@@ -1,7 +1,10 @@
 import { render, screen } from '@testing-library/react-native';
+import { ComponentProps } from 'react';
 import { LineChart } from './LineChart';
 
-const lineSeries = [
+type Props = ComponentProps<typeof LineChart>;
+
+const lineSeries: Props['lineSeries'] = [
   {
     data: [
       { x: 0, y: 49 },
@@ -20,40 +23,47 @@ const lineSeries = [
   },
 ];
 
-const scatterSeries = {
+const scatterSeries: Props['scatterSeries'] = {
   data: [{ x: 6, y: 65 }],
   color: '#e53935',
 };
 
+const renderComponent = (props: Partial<Props> = {}) =>
+  render(<LineChart lineSeries={lineSeries} {...props} />);
+
 describe('LineChart', () => {
-  it('should render without error when given only lineSeries', () => {
-    render(<LineChart lineSeries={lineSeries} />);
+  it('should render without error when given only lineSeries', async () => {
+    renderComponent({ xLabel: 'Age' });
+
+    expect(await screen.findByText('Age')).toBeOnTheScreen();
   });
 
-  it('should render without error when given lineSeries and scatterSeries', () => {
-    render(<LineChart lineSeries={lineSeries} scatterSeries={scatterSeries} />);
+  it('should render without error when given lineSeries and scatterSeries', async () => {
+    renderComponent({ scatterSeries, xLabel: 'Age' });
+
+    expect(await screen.findByText('Age')).toBeOnTheScreen();
   });
 
   it('should display xLabel when xLabel prop is provided', async () => {
-    render(<LineChart lineSeries={lineSeries} xLabel="Age (months)" />);
+    renderComponent({ xLabel: 'Age (months)' });
 
     expect(await screen.findByText('Age (months)')).toBeOnTheScreen();
   });
 
   it('should not display xLabel when xLabel prop is not provided', () => {
-    render(<LineChart lineSeries={lineSeries} />);
+    renderComponent();
 
     expect(screen.queryByText('Age (months)')).toBeNull();
   });
 
   it('should display yLabel when yLabel prop is provided', async () => {
-    render(<LineChart lineSeries={lineSeries} yLabel="Height (cm)" />);
+    renderComponent({ yLabel: 'Height (cm)' });
 
     expect(await screen.findByText('Height (cm)')).toBeOnTheScreen();
   });
 
   it('should not display yLabel when yLabel prop is not provided', () => {
-    render(<LineChart lineSeries={lineSeries} />);
+    renderComponent();
 
     expect(screen.queryByText('Height (cm)')).toBeNull();
   });
