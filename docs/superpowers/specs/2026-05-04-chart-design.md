@@ -23,6 +23,7 @@ Migrating from Expo Go to development builds to support native dependencies.
 - Add scripts to `apps/mobile/package.json`:
   - `build:dev:ios` → `eas build --profile development --platform ios`
   - `build:dev:android` → `eas build --profile development --platform android`
+- Update `apps/mobile/README.md` to document how to build and run the app using EAS dev builds (replacing the current Expo Go instructions)
 
 ### Chart Library (ui-kit-mobile)
 
