@@ -1,5 +1,9 @@
-import { StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { matchFont } from '@shopify/react-native-skia';
+import { useMemo } from 'react';
+import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 import { CartesianChart, Line, Scatter, type PointsArray } from 'victory-native';
+
+const FONT_FAMILY = Platform.OS === 'ios' ? 'Helvetica' : 'sans-serif';
 
 export type DataPoint = { x: number; y: number };
 
@@ -60,13 +64,21 @@ const buildChartData = (lineSeriesInput: LineSeries[], scatterSeries?: ScatterSe
 
 export const LineChart = ({ lineSeries, scatterSeries, xLabel, yLabel, style }: Props) => {
   const { data, lineYKeys, yKeys } = buildChartData(lineSeries, scatterSeries);
+  const axisFont = useMemo(() => matchFont({ fontFamily: FONT_FAMILY, fontSize: 11 }), []);
 
   return (
     <View style={[styles.container, style]}>
       <View style={styles.chartRow}>
         {yLabel !== undefined && <Text style={styles.yLabel}>{yLabel}</Text>}
         <View style={styles.chartArea}>
-          <CartesianChart data={data as any} xKey={'x' as never} yKeys={yKeys as any}>
+          <CartesianChart
+            data={data}
+            xKey={'x' as never}
+            yKeys={yKeys}
+            xAxis={{ font: axisFont }}
+            yAxis={[{ font: axisFont }]}
+            frame={{}}
+          >
             {({ points }: { points: Record<string, PointsArray> }) => (
               <>
                 {lineYKeys.map((key, i) => (
@@ -99,6 +111,7 @@ export const LineChart = ({ lineSeries, scatterSeries, xLabel, yLabel, style }: 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignSelf: 'stretch',
   },
   chartRow: {
     flex: 1,
