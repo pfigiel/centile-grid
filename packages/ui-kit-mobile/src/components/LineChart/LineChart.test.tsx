@@ -53,7 +53,7 @@ describe('LineChart', () => {
   it('should not display xLabel when xLabel prop is not provided', () => {
     renderComponent();
 
-    expect(screen.queryByText('Age (months)')).toBeNull();
+    expect(screen.queryByText('Age (months)')).not.toBeOnTheScreen();
   });
 
   it('should display yLabel when yLabel prop is provided', async () => {
@@ -65,6 +65,6 @@ describe('LineChart', () => {
   it('should not display yLabel when yLabel prop is not provided', () => {
     renderComponent();
 
-    expect(screen.queryByText('Height (cm)')).toBeNull();
+    expect(screen.queryByText('Height (cm)')).not.toBeOnTheScreen();
   });
 });
