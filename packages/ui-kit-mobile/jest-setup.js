@@ -38,4 +38,13 @@ jest.mock('@gorhom/bottom-sheet', () => {
   };
 });
 
+jest.mock('victory-native', () => {
+  const { View } = require('react-native');
+  return {
+    CartesianChart: ({ children }) => <View>{children({ points: {} })}</View>,
+    Line: () => null,
+    Scatter: () => null,
+  };
+});
+
 setUpTests();
