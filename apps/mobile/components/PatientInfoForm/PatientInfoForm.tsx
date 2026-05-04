@@ -1,3 +1,4 @@
+import { PatientInfo } from '@/types';
 import { Button, NumberInput, Select } from '@centile-grid/ui-kit-mobile';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { StyleSheet, Text, View } from 'react-native';
@@ -5,15 +6,14 @@ import { StyleSheet, Text, View } from 'react-native';
 const parameters = ['AGE', 'HEIGHT', 'WEIGHT'] as const;
 type Parameter = (typeof parameters)[number];
 
-type ParameterValues = {
-  age?: number; // years
-  height?: number; // cm
-  weight?: number; // kg
+type ParameterValues = Exclude<PatientInfo, 'gender'>;
+
+type FormValues = PatientInfo & {
+  selectedParameters: Parameter[];
 };
 
-type FormValues = ParameterValues & {
-  gender?: 'MALE' | 'FEMALE';
-  selectedParameters: Parameter[];
+type Props = {
+  onSubmit: (values: PatientInfo) => void;
 };
 
 const parameterToFieldNameMap: Record<Parameter, keyof ParameterValues> = {
@@ -34,17 +34,13 @@ const parameterToFieldLabelMap: Record<Parameter, string> = {
   WEIGHT: 'Weight [kg]',
 };
 
-export const PatientInfoForm = () => {
+export const PatientInfoForm = ({ onSubmit }: Props) => {
   const form = useForm<FormValues>({ defaultValues: { selectedParameters: ['AGE'] } });
 
   const { watch, setValue } = form;
 
   const selectedParameters: Parameter[] = watch('selectedParameters');
   const availableParameters = parameters.filter((param) => !selectedParameters.includes(param));
-
-  const onSubmit = (values: FormValues) => {
-    console.log('VALUES', values);
-  };
 
   return (
     <View style={styles.container}>
@@ -73,7 +69,7 @@ export const PatientInfoForm = () => {
                   </Button>
                 </>
               )}
-            ></Controller>
+            />
           </View>
         </View>
         {selectedParameters.length > 0 && (

@@ -1,5 +1,9 @@
 const { setUpTests } = require('react-native-reanimated');
 
+jest.mock('@shopify/react-native-skia', () => ({
+  matchFont: () => null,
+}));
+
 jest.mock('@gorhom/bottom-sheet', () => {
   const { forwardRef, useImperativeHandle, useState } = require('react');
   const { View, ScrollView } = require('react-native');
@@ -35,6 +39,19 @@ jest.mock('@gorhom/bottom-sheet', () => {
     BottomSheetScrollView: ScrollView,
     // eslint-disable-next-line react/prop-types
     BottomSheetModalProvider: ({ children }) => <>{children}</>,
+  };
+});
+
+jest.mock('victory-native', () => {
+  const { View } = require('react-native');
+  return {
+    // eslint-disable-next-line react/prop-types
+    CartesianChart: ({ children }) => {
+      const points = new Proxy({}, { get: () => [] });
+      return <View>{children({ points })}</View>;
+    },
+    Line: () => null,
+    Scatter: () => null,
   };
 });
 

@@ -4,5 +4,13 @@
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
   },
-  "cSpell.words": ["centilegrid", "gorhom", "mobileprovision", "turborepo", "worklets"]
+  "cSpell.words": [
+    "behaviour",
+    "centilegrid",
+    "gorhom",
+    "mobileprovision",
+    "skia",
+    "turborepo",
+    "worklets"
+  ]
 }
