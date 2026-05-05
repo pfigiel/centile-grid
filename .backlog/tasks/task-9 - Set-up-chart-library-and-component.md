@@ -4,11 +4,11 @@ title: Set up chart library and component
 status: Done
 assignee: []
 created_date: '2026-05-04 11:11'
-updated_date: '2026-05-05 09:29'
+updated_date: '2026-05-05 10:51'
 labels:
   - ui-kit-mobile
 dependencies: []
-ordinal: 8000
+ordinal: 9000
 ---
 
 ## Description

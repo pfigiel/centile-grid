@@ -4,10 +4,10 @@ title: Prepare monorepo setup
 status: Done
 assignee: []
 created_date: '2026-04-30 10:51'
-updated_date: '2026-05-01 10:57'
+updated_date: '2026-05-05 10:51'
 labels: []
 dependencies: []
-ordinal: 3000
+ordinal: 4000
 ---
 
 ## Description

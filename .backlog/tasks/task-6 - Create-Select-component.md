@@ -4,11 +4,11 @@ title: Create Select component
 status: Done
 assignee: []
 created_date: '2026-05-01 10:57'
-updated_date: '2026-05-03 17:56'
+updated_date: '2026-05-05 10:51'
 labels:
   - ui-kit-mobile
 dependencies: []
-ordinal: 5000
+ordinal: 6000
 ---
 
 ## Description

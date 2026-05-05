@@ -4,11 +4,11 @@ title: Create TextInput and NumberInput components
 status: Done
 assignee: []
 created_date: '2026-05-03 11:15'
-updated_date: '2026-05-03 17:56'
+updated_date: '2026-05-05 10:51'
 labels:
   - ui-kit-mobile
 dependencies: []
-ordinal: 6000
+ordinal: 7000
 ---
 
 ## Description

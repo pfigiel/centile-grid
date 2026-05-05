@@ -4,10 +4,10 @@ title: Add tests setup (jest)
 status: Done
 assignee: []
 created_date: '2026-04-30 19:54'
-updated_date: '2026-05-01 10:57'
+updated_date: '2026-05-05 10:51'
 labels: []
 dependencies: []
-ordinal: 4000
+ordinal: 5000
 ---
 
 ## Description

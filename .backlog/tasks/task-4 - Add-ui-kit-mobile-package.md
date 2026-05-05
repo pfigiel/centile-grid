@@ -4,10 +4,10 @@ title: Add ui-kit-mobile package
 status: Done
 assignee: []
 created_date: '2026-04-30 17:11'
-updated_date: '2026-05-01 10:57'
+updated_date: '2026-05-05 10:51'
 labels: []
 dependencies: []
-ordinal: 2000
+ordinal: 3000
 ---
 
 ## Description

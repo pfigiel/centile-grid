@@ -1,12 +1,13 @@
 ---
 id: TASK-2
 title: Prepare initial chart reference data
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-04-30 09:58'
-updated_date: '2026-04-30 10:56'
+updated_date: '2026-05-05 10:51'
 labels: []
 dependencies: []
+ordinal: 10000
 ---
 
 ## Description
