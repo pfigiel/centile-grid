@@ -1,8 +1,9 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
 import { ChartController } from './chart.controller';
-import { ChartService } from './chart.service';
 import { ChartDataPoint } from './chart.repository';
+import { ChartService } from './chart.service';
+import { Gender, GrowthParameter } from './types';
 
 describe('ChartController', () => {
   let controller: ChartController;
@@ -29,10 +30,12 @@ describe('ChartController', () => {
   });
 
   it('should throw NotFoundException when gender is invalid', () => {
-    expect(() => controller.getChartData('alien', 'height')).toThrow(NotFoundException);
+    expect(() => controller.getChartData('alien' as Gender, 'height')).toThrow(NotFoundException);
   });
 
   it('should throw NotFoundException when parameter is invalid', () => {
-    expect(() => controller.getChartData('male', 'bmi')).toThrow(NotFoundException);
+    expect(() => controller.getChartData('male', 'bmi' as GrowthParameter)).toThrow(
+      NotFoundException,
+    );
   });
 });
