@@ -7,6 +7,10 @@
     "eslint --config apps/mobile/eslint.config.mjs --fix",
     "prettier --write"
   ],
+  "apps/backend/**/*.ts": [
+    "eslint --config apps/backend/eslint.config.mjs --fix",
+    "prettier --write"
+  ],
   "**/*.{json,md}": ["prettier --write"],
   "**/*.{ts,tsx}": ["bash -c 'pnpm typecheck'"]
 }
