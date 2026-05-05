@@ -16,6 +16,7 @@ catalogs:
     eslint: 9.25.0
     eslint-config-prettier: 10.1.8
     eslint-plugin-prefer-arrow: 1.2.3
+    typescript-eslint: 8.59.2
 
   test:
     '@testing-library/react-native': 13.3.3

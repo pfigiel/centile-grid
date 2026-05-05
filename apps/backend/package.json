@@ -30,6 +30,6 @@
     "ts-jest": "^29.2.0",
     "ts-node": "^10.9.2",
     "typescript": "catalog:",
-    "typescript-eslint": "^8.0.0"
+    "typescript-eslint": "catalog:lint"
   }
 }
