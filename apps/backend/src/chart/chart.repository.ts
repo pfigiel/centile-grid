@@ -1,6 +1,7 @@
+import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import { Injectable } from '@nestjs/common';
+import { Gender, GrowthParameter } from './types';
 
 export interface ChartDataPoint {
   age: number;
@@ -13,13 +14,11 @@ export interface ChartDataPoint {
   c97: number;
 }
 
-export const GENDERS = ['male', 'female'] as const;
-export const PARAMETERS = ['height', 'weight'] as const;
-export type Gender = (typeof GENDERS)[number];
-export type Parameter = (typeof PARAMETERS)[number];
+export const GENDERS = ['male', 'female'] satisfies Gender[];
+export const PARAMETERS = ['height', 'weight'] satisfies GrowthParameter[];
 
 export interface IChartRepository {
-  findAll(gender: Gender, parameter: Parameter): ChartDataPoint[];
+  findAll(gender: Gender, parameter: GrowthParameter): ChartDataPoint[];
 }
 
 export const CHART_REPOSITORY = 'CHART_REPOSITORY';
@@ -39,7 +38,7 @@ export class CsvChartRepository implements IChartRepository {
     }
   }
 
-  findAll(gender: Gender, parameter: Parameter): ChartDataPoint[] {
+  findAll(gender: Gender, parameter: GrowthParameter): ChartDataPoint[] {
     return this.cache.get(`${gender}_${parameter}`) ?? [];
   }
 
