@@ -29,10 +29,8 @@ export class CsvChartRepository implements IChartRepository {
   private readonly cache = new Map<string, ChartDataPoint[]>();
 
   constructor() {
-    const genders: Gender[] = ['male', 'female'];
-    const parameters: Parameter[] = ['height', 'weight'];
-    for (const gender of genders) {
-      for (const parameter of parameters) {
+    for (const gender of GENDERS) {
+      for (const parameter of PARAMETERS) {
         const key = `${gender}_${parameter}`;
         const filePath = path.join(__dirname, '..', 'data', `${key}.csv`);
         const content = fs.readFileSync(filePath, 'utf-8');
