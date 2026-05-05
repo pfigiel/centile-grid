@@ -6,6 +6,7 @@ Child growth chart application for pediatricians and parents. Built on TS/React/
 
 | Path                                                         | Description                           |
 | ------------------------------------------------------------ | ------------------------------------- |
+| [`apps/backend`](apps/backend/README.md)                     | NestJS REST API (Lambda + HTTP)       |
 | [`apps/mobile`](apps/mobile/README.md)                       | Expo React Native app                 |
 | [`packages/ui-kit-mobile`](packages/ui-kit-mobile/README.md) | Shared React Native component library |
 

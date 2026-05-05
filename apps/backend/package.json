@@ -12,23 +12,23 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@codegenie/serverless-express": "^4.0.4",
-    "@nestjs/common": "^11.0.0",
-    "@nestjs/core": "^11.0.0",
-    "@nestjs/platform-express": "^11.0.0",
-    "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.0"
+    "@codegenie/serverless-express": "5.0.0",
+    "@nestjs/common": "11.0.0",
+    "@nestjs/core": "11.0.0",
+    "@nestjs/platform-express": "11.0.0",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.0"
   },
   "devDependencies": {
-    "@nestjs/testing": "^11.0.0",
-    "@types/aws-lambda": "^8.10.0",
+    "@nestjs/testing": "11.0.0",
+    "@types/aws-lambda": "8.10.0",
     "@types/jest": "catalog:test",
-    "@types/node": "^22.0.0",
+    "@types/node": "22.0.0",
     "eslint": "catalog:lint",
     "eslint-config-prettier": "catalog:lint",
     "jest": "catalog:test",
-    "ts-jest": "^29.2.0",
-    "ts-node": "^10.9.2",
+    "ts-jest": "catalog:test",
+    "ts-node": "10.9.2",
     "typescript": "catalog:",
     "typescript-eslint": "catalog:lint"
   }
