@@ -1,14 +1,14 @@
 ---
 id: TASK-9
 title: Set up chart library and component
-status: In Progress
+status: Done
 assignee: []
 created_date: '2026-05-04 11:11'
-updated_date: '2026-05-04 11:13'
+updated_date: '2026-05-05 09:29'
 labels:
   - ui-kit-mobile
 dependencies: []
-ordinal: 1000
+ordinal: 8000
 ---
 
 ## Description

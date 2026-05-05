@@ -12,7 +12,11 @@
     "test": "jest --passWithNoTests",
     "clean": "rm -rf .expo dist",
     "build:dev:ios": "eas build --profile development --platform ios",
-    "build:dev:android": "eas build --profile development --platform android"
+    "build:dev:android": "eas build --profile development --platform android",
+    "prebuild:ios": "expo prebuild --platform ios",
+    "prebuild:android": "expo prebuild --platform android",
+    "build:local:ios": "eas build --local --profile development --platform ios",
+    "build:local:android": "eas build --local --profile development --platform android"
   },
   "dependencies": {
     "@centile-grid/ui-kit-mobile": "workspace:*",
