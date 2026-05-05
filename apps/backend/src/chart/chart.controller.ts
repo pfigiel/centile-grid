@@ -1,9 +1,6 @@
 import { Controller, Get, Param, NotFoundException } from '@nestjs/common';
 import { ChartService } from './chart.service';
-import { ChartDataPoint, Gender, Parameter } from './chart.repository';
-
-const VALID_GENDERS: Gender[] = ['male', 'female'];
-const VALID_PARAMETERS: Parameter[] = ['height', 'weight'];
+import { ChartDataPoint, Gender, GENDERS, Parameter, PARAMETERS } from './chart.repository';
 
 @Controller('chart')
 export class ChartController {
@@ -14,10 +11,10 @@ export class ChartController {
     @Param('gender') gender: string,
     @Param('parameter') parameter: string,
   ): { data: ChartDataPoint[] } {
-    if (!VALID_GENDERS.includes(gender as Gender)) {
+    if (!GENDERS.includes(gender as Gender)) {
       throw new NotFoundException();
     }
-    if (!VALID_PARAMETERS.includes(parameter as Parameter)) {
+    if (!PARAMETERS.includes(parameter as Parameter)) {
       throw new NotFoundException();
     }
     return { data: this.chartService.getChartData(gender as Gender, parameter as Parameter) };

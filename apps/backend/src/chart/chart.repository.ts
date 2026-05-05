@@ -13,8 +13,10 @@ export interface ChartDataPoint {
   c97: number;
 }
 
-export type Gender = 'male' | 'female';
-export type Parameter = 'height' | 'weight';
+export const GENDERS = ['male', 'female'] as const;
+export const PARAMETERS = ['height', 'weight'] as const;
+export type Gender = (typeof GENDERS)[number];
+export type Parameter = (typeof PARAMETERS)[number];
 
 export interface IChartRepository {
   findAll(gender: Gender, parameter: Parameter): ChartDataPoint[];
