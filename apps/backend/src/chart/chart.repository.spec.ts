@@ -53,4 +53,20 @@ describe('CsvChartRepository', () => {
       c97: 18.0,
     });
   });
+
+  it('should return 16 rows with correct first row when male weight is requested', () => {
+    const data = repo.findAll('male', 'weight');
+
+    expect(data).toHaveLength(16);
+    expect(data[0]).toEqual({
+      age: 3,
+      c3: 11.5,
+      c10: 12.5,
+      c25: 13.5,
+      c50: 14.5,
+      c75: 15.5,
+      c90: 16.5,
+      c97: 18.0,
+    });
+  });
 });

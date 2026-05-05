@@ -44,7 +44,10 @@ export class CsvChartRepository implements IChartRepository {
   }
 
   private parseRows(csvContent: string): ChartDataPoint[] {
-    const [headerLine, ...dataLines] = csvContent.trim().split('\n');
+    const [headerLine, ...dataLines] = csvContent
+      .trim()
+      .split('\n')
+      .filter((l) => l.trim().length > 0);
     const headers = headerLine.split(',').map((h) =>
       h
         .trim()
@@ -54,11 +57,17 @@ export class CsvChartRepository implements IChartRepository {
 
     return dataLines.map((line) => {
       const values = line.split(',').map((v) => parseFloat(v.trim()));
-      const point: Record<string, number> = {};
-      headers.forEach((h, i) => {
-        point[h] = values[i];
-      });
-      return point as unknown as ChartDataPoint;
+      const get = (name: string) => values[headers.indexOf(name)];
+      return {
+        age: get('age'),
+        c3: get('c3'),
+        c10: get('c10'),
+        c25: get('c25'),
+        c50: get('c50'),
+        c75: get('c75'),
+        c90: get('c90'),
+        c97: get('c97'),
+      };
     });
   }
 }
