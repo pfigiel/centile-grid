@@ -10,6 +10,7 @@ describe('ChartService', () => {
   const mockRepo: IChartRepository = { findAll: jest.fn().mockReturnValue(mockData) };
 
   beforeEach(async () => {
+    jest.clearAllMocks();
     const module: TestingModule = await Test.createTestingModule({
       providers: [ChartService, { provide: CHART_REPOSITORY, useValue: mockRepo }],
     }).compile();
