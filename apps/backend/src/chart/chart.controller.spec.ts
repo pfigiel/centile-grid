@@ -1,13 +1,12 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { ChartDataPointDto, GenderDto, GrowthParameterDto } from '@centile-grid/contract';
 import { ChartController } from './chart.controller';
-import { ChartDataPoint } from './chart.repository';
 import { ChartService } from './chart.service';
-import { Gender, GrowthParameter } from './types';
 
 describe('ChartController', () => {
   let controller: ChartController;
-  const mockData: ChartDataPoint[] = [
+  const mockData: ChartDataPointDto[] = [
     { age: 3, c3: 90, c10: 92, c25: 94, c50: 96, c75: 98, c90: 100, c97: 102 },
   ];
   const mockChartService = { getChartData: jest.fn().mockReturnValue(mockData) };
@@ -30,11 +29,13 @@ describe('ChartController', () => {
   });
 
   it('should throw NotFoundException when gender is invalid', () => {
-    expect(() => controller.getChartData('alien' as Gender, 'height')).toThrow(NotFoundException);
+    expect(() => controller.getChartData('alien' as GenderDto, 'height')).toThrow(
+      NotFoundException,
+    );
   });
 
   it('should throw NotFoundException when parameter is invalid', () => {
-    expect(() => controller.getChartData('male', 'bmi' as GrowthParameter)).toThrow(
+    expect(() => controller.getChartData('male', 'bmi' as GrowthParameterDto)).toThrow(
       NotFoundException,
     );
   });
