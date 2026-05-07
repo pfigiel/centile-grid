@@ -1,1 +1,4 @@
-export default { preset: 'jest-expo' };
+export default {
+  preset: 'jest-expo',
+  setupFilesAfterEnv: ['./jest.setup.ts'],
+};
