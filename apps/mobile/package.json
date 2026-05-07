@@ -60,6 +60,7 @@
     "eslint-plugin-prefer-arrow": "catalog:lint",
     "jest": "catalog:test",
     "jest-expo": "catalog:test",
+    "msw": "catalog:test",
     "react-test-renderer": "catalog:react",
     "typescript": "catalog:"
   },
