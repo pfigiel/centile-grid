@@ -1,13 +1,13 @@
 ---
 id: TASK-11
 title: Add chart endpoints
-status: In Progress
+status: Done
 assignee: []
 created_date: '2026-05-05 10:51'
-updated_date: '2026-05-05 10:52'
+updated_date: '2026-05-07 08:55'
 labels: []
 dependencies: []
-ordinal: 1000
+ordinal: 11000
 ---
 
 ## Description
