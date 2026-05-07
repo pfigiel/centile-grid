@@ -13,19 +13,19 @@ beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-const queryClient = new QueryClient({
-  defaultOptions: { queries: { retry: false } },
-});
-
 const Wrapper = ({ children }: { children: ReactNode }) => (
-  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  <QueryClientProvider
+    client={
+      new QueryClient({
+        defaultOptions: { queries: { retry: false } },
+      })
+    }
+  >
+    {children}
+  </QueryClientProvider>
 );
 
 describe('useGetChartDataQuery', () => {
-  afterEach(() => {
-    queryClient.clear();
-  });
-
   it('should return chart data when query succeeds', async () => {
     const { result } = renderHook(() => useGetChartDataQuery('male', 'height'), {
       wrapper: Wrapper,
