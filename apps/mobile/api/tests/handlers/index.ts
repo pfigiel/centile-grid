@@ -1,3 +1,3 @@
-import * as chart from './chart';
+import { getChartData } from './chart';
 
-export const handlers = { chart };
+export const handlers = { chart: { getChartData } };
