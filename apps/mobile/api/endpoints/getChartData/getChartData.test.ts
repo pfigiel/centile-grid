@@ -6,7 +6,7 @@ const mockDataPoint = { age: 1, c3: 70, c10: 72, c25: 74, c50: 76, c75: 78, c90:
 
 const server = setupServer(handlers.chart.getChartData.success({ data: [mockDataPoint] }));
 
-beforeAll(() => server.listen());
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
