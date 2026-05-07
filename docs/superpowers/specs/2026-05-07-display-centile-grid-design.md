@@ -27,12 +27,14 @@ A thin abstraction over `useGetChartDataQuery` that owns all type mapping and da
 **Signature:**
 
 ```ts
-useChartData({ gender, parameter, age, value }: {
+type Props = {
   gender: Gender,
   parameter: GrowthParameter,
   age: number,
   value: number,
-})
+}
+
+useChartData({ gender, parameter, age, value }: Props)
 ```
 
 **Returns:**
