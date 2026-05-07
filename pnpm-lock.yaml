@@ -77,6 +77,9 @@ importers:
 
   apps/backend:
     dependencies:
+      '@centile-grid/contract':
+        specifier: workspace:*
+        version: link:../../packages/contract
       '@codegenie/serverless-express':
         specifier: 5.0.0
         version: 5.0.0
@@ -132,6 +135,9 @@ importers:
 
   apps/mobile:
     dependencies:
+      '@centile-grid/contract':
+        specifier: workspace:*
+        version: link:../../packages/contract
       '@centile-grid/ui-kit-mobile':
         specifier: workspace:*
         version: link:../../packages/ui-kit-mobile
@@ -147,6 +153,9 @@ importers:
       '@react-navigation/native':
         specifier: 7.2.2
         version: 7.2.2(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
+      '@tanstack/react-query':
+        specifier: 5.79.0
+        version: 5.79.0(react@19.1.0)
       expo:
         specifier: 54.0.34
         version: 54.0.34(@babel/core@7.29.0)(@expo/metro-runtime@6.1.2)(expo-router@6.0.23)(graphql@16.8.1)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)(typescript@5.9.2)
@@ -247,6 +256,12 @@ importers:
       react-test-renderer:
         specifier: catalog:react
         version: 19.1.0(react@19.1.0)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.2
+
+  packages/contract:
+    devDependencies:
       typescript:
         specifier: 'catalog:'
         version: 5.9.2
@@ -1822,6 +1837,14 @@ packages:
 
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
+
+  '@tanstack/query-core@5.79.0':
+    resolution: {integrity: sha512-s+epTqqLM0/TbJzMAK7OEhZIzh63P9sWz5HEFc5XHL4FvKQXQkcjI8F3nee+H/xVVn7mrP610nVXwOytTSYd0w==}
+
+  '@tanstack/react-query@5.79.0':
+    resolution: {integrity: sha512-DjC4JIYZnYzxaTzbg3osOU63VNLP67dOrWet2cZvXgmgwAXNxfS52AMq86M5++ILuzW+BqTUEVMTjhrZ7/XBuA==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@testing-library/react-native@13.3.3':
     resolution: {integrity: sha512-k6Mjsd9dbZgvY4Bl7P1NIpePQNi+dfYtlJ5voi9KQlynxSyQkfOgJmYGCYmw/aSgH/rUcFvG8u5gd4npzgRDyg==}
@@ -8866,6 +8889,13 @@ snapshots:
   '@sinonjs/fake-timers@10.3.0':
     dependencies:
       '@sinonjs/commons': 3.0.1
+
+  '@tanstack/query-core@5.79.0': {}
+
+  '@tanstack/react-query@5.79.0(react@19.1.0)':
+    dependencies:
+      '@tanstack/query-core': 5.79.0
+      react: 19.1.0
 
   '@testing-library/react-native@13.3.3(jest@29.7.0(@types/node@25.6.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react-test-renderer@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
