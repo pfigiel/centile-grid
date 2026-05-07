@@ -1,5 +1,7 @@
+import { GenderDto } from '@centile-grid/contract';
+
 export type PatientInfo = {
-  gender?: 'MALE' | 'FEMALE';
+  gender?: GenderDto;
   age?: number; // years
   height?: number; // cm
   weight?: number; // kg

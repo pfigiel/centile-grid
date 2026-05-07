@@ -55,15 +55,15 @@ export const PatientInfoForm = ({ onSubmit }: Props) => {
                 <>
                   <Button
                     style={styles.genderSelectorButton}
-                    variant={field.value === 'MALE' ? 'primary' : 'secondary'}
-                    onPress={() => field.onChange('MALE')}
+                    variant={field.value === 'male' ? 'primary' : 'secondary'}
+                    onPress={() => field.onChange('male')}
                   >
                     Boy
                   </Button>
                   <Button
                     style={styles.genderSelectorButton}
-                    variant={field.value === 'FEMALE' ? 'primary' : 'secondary'}
-                    onPress={() => field.onChange('FEMALE')}
+                    variant={field.value === 'female' ? 'primary' : 'secondary'}
+                    onPress={() => field.onChange('female')}
                   >
                     Girl
                   </Button>
