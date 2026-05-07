@@ -1,13 +1,13 @@
 ---
 id: TASK-12
 title: Set up API integration layer
-status: In Progress
+status: Done
 assignee: []
 created_date: '2026-05-07 08:54'
-updated_date: '2026-05-07 08:54'
+updated_date: '2026-05-07 17:14'
 labels: []
 dependencies: []
-ordinal: 2000
+ordinal: 12000
 ---
 
 ## Description

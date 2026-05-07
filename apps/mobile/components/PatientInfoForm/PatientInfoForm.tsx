@@ -44,85 +44,87 @@ export const PatientInfoForm = ({ onSubmit }: Props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Enter patient data</Text>
       <FormProvider {...form}>
-        <View>
-          <Text style={styles.sectionLabel}>Gender</Text>
-          <View style={styles.genderSelector}>
-            <Controller<FormValues>
-              name="gender"
-              render={({ field }) => (
-                <>
-                  <Button
-                    style={styles.genderSelectorButton}
-                    variant={field.value === 'male' ? 'primary' : 'secondary'}
-                    onPress={() => field.onChange('male')}
-                  >
-                    Boy
-                  </Button>
-                  <Button
-                    style={styles.genderSelectorButton}
-                    variant={field.value === 'female' ? 'primary' : 'secondary'}
-                    onPress={() => field.onChange('female')}
-                  >
-                    Girl
-                  </Button>
-                </>
-              )}
-            />
-          </View>
-        </View>
-        {selectedParameters.length > 0 && (
+        <View style={styles.inputsContainer}>
+          <Text style={styles.title}>Enter patient data</Text>
           <View>
-            <Text style={styles.sectionLabel}>Parameters</Text>
-            <View style={styles.paramRows}>
-              {selectedParameters.map((param) => (
-                <View style={styles.paramRow} key={param}>
-                  <Controller<FormValues>
-                    name={parameterToFieldNameMap[param]}
-                    render={({ field }) => (
-                      <NumberInput
-                        style={styles.paramInput}
-                        label={parameterToFieldLabelMap[param]}
-                        value={field.value}
-                        onChangeValue={field.onChange}
-                      />
-                    )}
-                  />
-                  {param !== 'AGE' && (
+            <Text style={styles.sectionLabel}>Gender</Text>
+            <View style={styles.genderSelector}>
+              <Controller<FormValues>
+                name="gender"
+                render={({ field }) => (
+                  <>
                     <Button
-                      style={styles.deleteParamButton}
-                      styles={{
-                        content: styles.deleteParamButtonContent,
-                        label: styles.deleteParamButtonLabel,
-                      }}
-                      onPress={() =>
-                        setValue(
-                          'selectedParameters',
-                          selectedParameters.filter((selectedParam) => selectedParam !== param),
-                        )
-                      }
+                      style={styles.genderSelectorButton}
+                      variant={field.value === 'male' ? 'primary' : 'secondary'}
+                      onPress={() => field.onChange('male')}
                     >
-                      X
+                      Boy
                     </Button>
-                  )}
-                </View>
-              ))}
+                    <Button
+                      style={styles.genderSelectorButton}
+                      variant={field.value === 'female' ? 'primary' : 'secondary'}
+                      onPress={() => field.onChange('female')}
+                    >
+                      Girl
+                    </Button>
+                  </>
+                )}
+              />
             </View>
           </View>
-        )}
-        <Controller<FormValues, 'selectedParameters'>
-          name="selectedParameters"
-          render={({ field }) => (
-            <Select
-              disabled={availableParameters.length === 0}
-              label="Add parameter"
-              options={availableParameters}
-              onSelect={(value) => field.onChange([...field.value, value])}
-              renderValue={(value) => parameterToSelectOptionMap[value]}
-            />
+          {selectedParameters.length > 0 && (
+            <View>
+              <Text style={styles.sectionLabel}>Parameters</Text>
+              <View style={styles.paramRows}>
+                {selectedParameters.map((param) => (
+                  <View style={styles.paramRow} key={param}>
+                    <Controller<FormValues>
+                      name={parameterToFieldNameMap[param]}
+                      render={({ field }) => (
+                        <NumberInput
+                          style={styles.paramInput}
+                          label={parameterToFieldLabelMap[param]}
+                          value={field.value}
+                          onChangeValue={field.onChange}
+                        />
+                      )}
+                    />
+                    {param !== 'AGE' && (
+                      <Button
+                        style={styles.deleteParamButton}
+                        styles={{
+                          content: styles.deleteParamButtonContent,
+                          label: styles.deleteParamButtonLabel,
+                        }}
+                        onPress={() =>
+                          setValue(
+                            'selectedParameters',
+                            selectedParameters.filter((selectedParam) => selectedParam !== param),
+                          )
+                        }
+                      >
+                        X
+                      </Button>
+                    )}
+                  </View>
+                ))}
+              </View>
+            </View>
           )}
-        />
+          <Controller<FormValues, 'selectedParameters'>
+            name="selectedParameters"
+            render={({ field }) => (
+              <Select
+                disabled={availableParameters.length === 0}
+                label="Add parameter"
+                options={availableParameters}
+                onSelect={(value) => field.onChange([...field.value, value])}
+                renderValue={(value) => parameterToSelectOptionMap[value]}
+              />
+            )}
+          />
+        </View>
         <Button onPress={form.handleSubmit(onSubmit)}>Show grids</Button>
       </FormProvider>
     </View>
@@ -131,8 +133,11 @@ export const PatientInfoForm = ({ onSubmit }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: '100%',
-    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  inputsContainer: {
     gap: 32,
   },
   title: {
