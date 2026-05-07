@@ -19,7 +19,9 @@
     "build:local:android": "eas build --local --profile development --platform android"
   },
   "dependencies": {
+    "@centile-grid/contract": "workspace:*",
     "@centile-grid/ui-kit-mobile": "workspace:*",
+    "@tanstack/react-query": "5.79.0",
     "@expo/vector-icons": "15.0.3",
     "@react-navigation/bottom-tabs": "7.4.0",
     "@react-navigation/elements": "2.6.3",
@@ -58,6 +60,7 @@
     "eslint-plugin-prefer-arrow": "catalog:lint",
     "jest": "catalog:test",
     "jest-expo": "catalog:test",
+    "msw": "catalog:test",
     "react-test-renderer": "catalog:react",
     "typescript": "catalog:"
   },

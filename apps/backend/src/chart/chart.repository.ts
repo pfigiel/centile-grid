@@ -1,31 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
-import { Gender, GrowthParameter } from './types';
+import { ChartDataPointDto, GenderDto, GrowthParameterDto } from '@centile-grid/contract';
 
-export interface ChartDataPoint {
-  age: number;
-  c3: number;
-  c10: number;
-  c25: number;
-  c50: number;
-  c75: number;
-  c90: number;
-  c97: number;
-}
-
-export const GENDERS = ['male', 'female'] satisfies Gender[];
-export const PARAMETERS = ['height', 'weight'] satisfies GrowthParameter[];
+export const GENDERS = ['male', 'female'] satisfies GenderDto[];
+export const PARAMETERS = ['height', 'weight'] satisfies GrowthParameterDto[];
 
 export interface IChartRepository {
-  findAll(gender: Gender, parameter: GrowthParameter): ChartDataPoint[];
+  findAll(gender: GenderDto, parameter: GrowthParameterDto): ChartDataPointDto[];
 }
 
 export const CHART_REPOSITORY = 'CHART_REPOSITORY';
 
 @Injectable()
 export class CsvChartRepository implements IChartRepository {
-  private readonly cache = new Map<string, ChartDataPoint[]>();
+  private readonly cache = new Map<string, ChartDataPointDto[]>();
 
   constructor() {
     for (const gender of GENDERS) {
@@ -38,11 +27,11 @@ export class CsvChartRepository implements IChartRepository {
     }
   }
 
-  findAll(gender: Gender, parameter: GrowthParameter): ChartDataPoint[] {
+  findAll(gender: GenderDto, parameter: GrowthParameterDto): ChartDataPointDto[] {
     return this.cache.get(`${gender}_${parameter}`) ?? [];
   }
 
-  private parseRows(csvContent: string): ChartDataPoint[] {
+  private parseRows(csvContent: string): ChartDataPointDto[] {
     const [headerLine, ...dataLines] = csvContent
       .trim()
       .split('\n')

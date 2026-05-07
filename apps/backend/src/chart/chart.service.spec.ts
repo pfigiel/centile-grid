@@ -1,10 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { ChartDataPointDto } from '@centile-grid/contract';
 import { ChartService } from './chart.service';
-import { CHART_REPOSITORY, ChartDataPoint, IChartRepository } from './chart.repository';
+import { CHART_REPOSITORY, IChartRepository } from './chart.repository';
 
 describe('ChartService', () => {
   let service: ChartService;
-  const mockData: ChartDataPoint[] = [
+  const mockData: ChartDataPointDto[] = [
     { age: 3, c3: 90, c10: 92, c25: 94, c50: 96, c75: 98, c90: 100, c97: 102 },
   ];
   const mockRepo: IChartRepository = { findAll: jest.fn().mockReturnValue(mockData) };
