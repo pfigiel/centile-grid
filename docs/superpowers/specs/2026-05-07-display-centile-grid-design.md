@@ -18,41 +18,66 @@ The app currently has one route: `app/index.tsx`. A second route `app/results.ts
 
 `app/index.tsx` removes its current `patientInfo` state and hardcoded `LineChart`. The `PatientInfoForm` component itself requires no changes.
 
-## `useChartData` Hook
+## Hook Architecture
 
-**Location:** `apps/mobile/hooks/useChartData/useChartData.ts`
+Two hooks form a clean two-layer stack.
 
-A thin abstraction over `useGetChartDataQuery` that owns all type mapping and data shaping. The results screen calls it and passes the result directly to `LineChart`.
+### `useGetChartsDataQuery` (API layer)
 
-**Signature:**
+**Location:** `apps/mobile/api/hooks/queries/useGetChartsDataQuery/useGetChartsDataQuery.ts`
+
+Refactored and renamed from `useGetChartDataQuery`. Uses `useQueries` internally to fan out a dynamic array of queries. Knows nothing about the app's chart format — returns raw `ChartDataPointDto[]` results.
 
 ```ts
-type Props = {
-  gender: Gender,
-  parameter: GrowthParameter,
-  age: number,
-  value: number,
-}
+type Query = {
+  gender: Gender;
+  parameter: GrowthParameter;
+};
 
-useChartData({ gender, parameter, age, value }: Props)
+useGetChartsDataQuery(queries: Query[])
 ```
 
-**Returns:**
+Rename the existing test file and `index.ts` export accordingly.
+
+### `useChartsData` (mapping layer)
+
+**Location:** `apps/mobile/hooks/useChartsData/useChartsData.ts`
+
+Thin abstraction over `useGetChartsDataQuery`. Owns all DTO→chart format mapping. The results screen calls this and passes results directly to `LineChart`.
 
 ```ts
-{
-  chartData: { lineSeries: LineSeries[], scatterSeries: ScatterSeries } | undefined,
-  isLoading: boolean,
-  isError: boolean,
-}
+type Metric = {
+  parameter: GrowthParameter;
+  value: number;
+};
+
+type Props = {
+  gender: Gender;
+  age: number;
+  metrics: Metric[];
+};
+
+useChartsData({ gender, age, metrics }: Props)
+```
+
+**Returns:** `ChartResult[]` aligned 1:1 with the input `metrics` array, where:
+
+```ts
+type ChartResult = {
+  chartData: { lineSeries: LineSeries[]; scatterSeries: ScatterSeries } | undefined;
+  isLoading: boolean;
+  isError: boolean;
+};
 ```
 
 **Mapping logic:**
 
-- Maps `Gender` → `GenderDto` and `GrowthParameter` → `GrowthParameterDto` for the API call (identical values today; abstraction exists for future divergence).
-- Transforms `ChartDataPointDto[]` into 7 `LineSeries`, one per centile key (`c3`, `c10`, `c25`, `c50`, `c75`, `c90`, `c97`), where each data point is `{ x: age, y: centileValue }`.
-- Builds `ScatterSeries` from the `age` and `value` inputs: `{ data: [{ x: age, y: value }] }`.
+- Passes `metrics.map(({ parameter }) => ({ gender, parameter }))` to `useGetChartsDataQuery`.
+- For each result, transforms `ChartDataPointDto[]` into 7 `LineSeries`, one per centile key (`c3`, `c10`, `c25`, `c50`, `c75`, `c90`, `c97`), where each data point is `{ x: age, y: centileValue }`.
+- Builds `ScatterSeries` from the `age` and per-metric `value`: `{ data: [{ x: age, y: value }] }`.
 - Returns `chartData: undefined` while loading or on error.
+
+`LineSeries` and `ScatterSeries` must be exported from `packages/ui-kit-mobile`.
 
 ## Results Screen (`app/results.tsx`)
 
@@ -61,10 +86,10 @@ useChartData({ gender, parameter, age, value }: Props)
 **Behaviour:**
 
 - Determines which metrics to show based on which params are present (`height` param present → show height chart, `weight` param present → show weight chart).
-- Calls `useChartData` once per selected metric at the top of the component.
-- While any query is loading: shows a loading indicator.
-- If any query has `isError: true`: a `useEffect` calls `router.replace('/')` to navigate back to the form. No error UI is shown in this version; error messaging is deferred to a future task.
-- Once all queries succeed: renders a `ScrollView` with one labelled `LineChart` per metric.
+- Calls `useChartsData` once with a `metrics` array built from the present params.
+- While any result has `isLoading: true`: shows a loading indicator.
+- If any result has `isError: true`: a `useEffect` calls `router.replace('/')` to navigate back to the form. No error UI is shown in this version; error messaging is deferred to a future task.
+- Once all results have `chartData` defined: renders a `ScrollView` with one labelled `LineChart` per metric.
 
 **Chart labels:**
 
@@ -81,6 +106,7 @@ No separate `ChartSection` component; the screen is kept flat.
 
 ## Testing
 
-- **`useChartData`:** unit-tested with `renderHook` + `TestQueryClientProvider`. Verifies DTO→`lineSeries` mapping (correct number of series, correct x/y values) and scatter point construction.
+- **`useGetChartsDataQuery`:** unit-tested with `renderHook` + `TestQueryClientProvider`. Verifies queries are issued and raw DTO data is returned.
+- **`useChartsData`:** unit-tested with `renderHook` + `TestQueryClientProvider`. Verifies DTO→`lineSeries` mapping (correct number of series, correct x/y values) and scatter point construction.
 - **Results screen:** integration-tested with MSW handlers. Success path verifies charts render; error path verifies `router.replace('/')` is called.
 - **`app/index.tsx`:** tests that submitting the form calls `router.push` with the correct URL params.
