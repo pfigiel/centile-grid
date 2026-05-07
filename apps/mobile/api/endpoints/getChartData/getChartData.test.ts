@@ -4,7 +4,12 @@ const mockDataPoint = { age: 1, c3: 70, c10: 72, c25: 74, c50: 76, c75: 78, c90:
 
 describe('getChartData', () => {
   beforeEach(() => {
+    process.env.EXPO_PUBLIC_API_BASE_URL = 'http://localhost:3000';
     jest.spyOn(global, 'fetch').mockReset();
+  });
+
+  afterEach(() => {
+    delete process.env.EXPO_PUBLIC_API_BASE_URL;
   });
 
   it('should return chart data when response is ok', async () => {
