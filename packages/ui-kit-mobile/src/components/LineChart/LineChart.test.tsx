@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react-native';
+import { Text } from 'react-native';
 import { ComponentProps } from 'react';
 import { LineChart } from './LineChart';
+import { Container } from './Container';
 
 type Props = ComponentProps<typeof LineChart>;
 
@@ -66,5 +68,27 @@ describe('LineChart', () => {
     renderComponent();
 
     expect(screen.queryByText('Height (cm)')).not.toBeOnTheScreen();
+  });
+});
+
+describe('Container', () => {
+  it('should render children', async () => {
+    render(
+      <Container>
+        <Text>content</Text>
+      </Container>,
+    );
+
+    expect(await screen.findByText('content')).toBeOnTheScreen();
+  });
+
+  it('should apply additional style when style prop is provided', async () => {
+    render(
+      <Container style={{ backgroundColor: 'red' }}>
+        <Text>content</Text>
+      </Container>,
+    );
+
+    expect(await screen.findByText('content')).toBeOnTheScreen();
   });
 });
