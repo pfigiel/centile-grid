@@ -72,7 +72,7 @@ describe('LineChart', () => {
 });
 
 describe('Container', () => {
-  it('should render children', async () => {
+  it('should render children when rendered without extra props', async () => {
     render(
       <Container>
         <Text>content</Text>
