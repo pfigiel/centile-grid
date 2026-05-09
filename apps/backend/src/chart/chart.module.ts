@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
-import { ChartController } from './chart.controller';
-import { ChartService } from './chart.service';
-import { CsvChartRepository, CHART_REPOSITORY } from './chart.repository';
+import { Module } from '@nestjs/common'
+import { ChartController } from './chart.controller'
+import { ChartService } from './chart.service'
+import { CsvChartRepository, CHART_REPOSITORY } from './chart.repository'
 
 @Module({
   controllers: [ChartController],

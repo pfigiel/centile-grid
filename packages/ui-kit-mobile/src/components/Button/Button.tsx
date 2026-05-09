@@ -1,23 +1,23 @@
-import { ReactNode } from 'react';
-import { StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import { Button as RNPButton } from 'react-native-paper';
+import { ReactNode } from 'react'
+import { StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { Button as RNPButton } from 'react-native-paper'
 
 type Props = {
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>
   styles?: {
-    content?: StyleProp<ViewStyle>;
-    label?: StyleProp<TextStyle>;
-  };
-  children: ReactNode;
-  onPress?: () => void;
-  variant?: 'primary' | 'secondary';
-  disabled?: boolean;
-};
+    content?: StyleProp<ViewStyle>
+    label?: StyleProp<TextStyle>
+  }
+  children: ReactNode
+  onPress?: () => void
+  variant?: 'primary' | 'secondary'
+  disabled?: boolean
+}
 
 const modeByVariant = {
   primary: 'contained',
   secondary: 'contained-tonal',
-} as const;
+} as const
 
 export const Button = ({
   style,
@@ -37,10 +37,10 @@ export const Button = ({
   >
     {children}
   </RNPButton>
-);
+)
 
 const styles = StyleSheet.create({
   root: {
     borderRadius: 8,
   },
-});
+})

@@ -1,7 +1,7 @@
-import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
-import { ChartDataPointDto, GenderDto, GrowthParameterDto } from '@centile-grid/contract';
-import { GENDERS, PARAMETERS } from './chart.repository';
-import { ChartService } from './chart.service';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common'
+import { ChartDataPointDto, GenderDto, GrowthParameterDto } from '@centile-grid/contract'
+import { GENDERS, PARAMETERS } from './chart.repository'
+import { ChartService } from './chart.service'
 
 @Controller('chart')
 export class ChartController {
@@ -13,11 +13,11 @@ export class ChartController {
     @Param('parameter') parameter: GrowthParameterDto,
   ): { data: ChartDataPointDto[] } {
     if (!GENDERS.includes(gender)) {
-      throw new NotFoundException();
+      throw new NotFoundException()
     }
     if (!PARAMETERS.includes(parameter)) {
-      throw new NotFoundException();
+      throw new NotFoundException()
     }
-    return { data: this.chartService.getChartData(gender, parameter) };
+    return { data: this.chartService.getChartData(gender, parameter) }
   }
 }

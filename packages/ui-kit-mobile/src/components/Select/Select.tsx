@@ -1,27 +1,27 @@
-import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { ReactNode, useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { BottomSheetScrollView } from '@gorhom/bottom-sheet'
+import { ReactNode, useEffect, useState } from 'react'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import Animated, {
   interpolate,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
-import { BottomSheetModal } from '../BottomSheetModal';
+} from 'react-native-reanimated'
+import { BottomSheetModal } from '../BottomSheetModal'
 
 type Props<T extends string> = {
-  value?: T;
-  options: T[];
-  label?: string;
-  renderValue?: (value: T) => ReactNode;
-  onSelect?: (value: T) => void;
-  disabled?: boolean;
-};
+  value?: T
+  options: T[]
+  label?: string
+  renderValue?: (value: T) => ReactNode
+  onSelect?: (value: T) => void
+  disabled?: boolean
+}
 
-const LABEL_TOP_EMPTY = 20;
-const LABEL_TOP_FILLED = 8;
-const LABEL_SIZE_EMPTY = 16;
-const LABEL_SIZE_FILLED = 12;
+const LABEL_TOP_EMPTY = 20
+const LABEL_TOP_FILLED = 8
+const LABEL_SIZE_EMPTY = 16
+const LABEL_SIZE_FILLED = 12
 
 export const Select = <T extends string>({
   value,
@@ -31,26 +31,26 @@ export const Select = <T extends string>({
   onSelect,
   disabled,
 }: Props<T>) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const progress = useSharedValue(value !== undefined ? 1 : 0);
+  const [isOpen, setIsOpen] = useState(false)
+  const progress = useSharedValue(value !== undefined ? 1 : 0)
 
   useEffect(() => {
-    progress.value = withTiming(value !== undefined ? 1 : 0, { duration: 150 });
-  }, [progress, value]);
+    progress.value = withTiming(value !== undefined ? 1 : 0, { duration: 150 })
+  }, [progress, value])
 
   const animatedLabelStyle = useAnimatedStyle(() => ({
     top: interpolate(progress.value, [0, 1], [LABEL_TOP_EMPTY, LABEL_TOP_FILLED]),
     fontSize: interpolate(progress.value, [0, 1], [LABEL_SIZE_EMPTY, LABEL_SIZE_FILLED]),
-  }));
+  }))
 
-  const handleTogglePress = () => !disabled && setIsOpen(true);
+  const handleTogglePress = () => !disabled && setIsOpen(true)
 
   const handleSelect = (item: T) => {
-    onSelect?.(item);
-    setIsOpen(false);
-  };
+    onSelect?.(item)
+    setIsOpen(false)
+  }
 
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => setIsOpen(false)
 
   return (
     <View style={styles.container}>
@@ -86,8 +86,8 @@ export const Select = <T extends string>({
         </BottomSheetScrollView>
       </BottomSheetModal>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -144,4 +144,4 @@ const styles = StyleSheet.create({
   disabled: {
     opacity: 0.38,
   },
-});
+})

@@ -1,22 +1,22 @@
-import { BottomSheetView, BottomSheetModal as GBottomSheetModal } from '@gorhom/bottom-sheet';
-import { ReactNode, useEffect, useRef } from 'react';
+import { BottomSheetView, BottomSheetModal as GBottomSheetModal } from '@gorhom/bottom-sheet'
+import { ReactNode, useEffect, useRef } from 'react'
 
 type Props = {
-  isOpen: boolean;
-  onClose: () => void;
-  children: ReactNode;
-};
+  isOpen: boolean
+  onClose: () => void
+  children: ReactNode
+}
 
 export const BottomSheetModal = ({ isOpen, onClose, children }: Props) => {
-  const ref = useRef<GBottomSheetModal>(null);
+  const ref = useRef<GBottomSheetModal>(null)
 
   useEffect(() => {
     if (isOpen) {
-      ref.current?.present();
+      ref.current?.present()
     } else {
-      ref.current?.close();
+      ref.current?.close()
     }
-  }, [isOpen]);
+  }, [isOpen])
 
   return (
     <GBottomSheetModal
@@ -27,5 +27,5 @@ export const BottomSheetModal = ({ isOpen, onClose, children }: Props) => {
     >
       <BottomSheetView>{children}</BottomSheetView>
     </GBottomSheetModal>
-  );
-};
+  )
+}

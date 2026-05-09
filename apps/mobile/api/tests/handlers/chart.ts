@@ -1,5 +1,5 @@
-import { http, HttpResponse } from 'msw';
-import { ChartDataPointDto } from '@centile-grid/contract';
+import { http, HttpResponse } from 'msw'
+import { ChartDataPointDto } from '@centile-grid/contract'
 
 export const getChartData = {
   success: (overrides?: { data?: ChartDataPointDto[] }) =>
@@ -12,4 +12,4 @@ export const getChartData = {
       `${process.env.EXPO_PUBLIC_API_BASE_URL}/chart/:gender/:parameter`,
       () => new HttpResponse(null, { status: overrides?.status ?? 500 }),
     ),
-};
+}

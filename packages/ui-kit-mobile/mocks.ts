@@ -1,1 +1,1 @@
-export { skiaMock, victoryNativeMock, bottomSheetMock } from './src/mocks';
+export { skiaMock, victoryNativeMock, bottomSheetMock } from './src/mocks'

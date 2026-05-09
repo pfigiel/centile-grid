@@ -1,1 +1,1 @@
-export { getChartData } from './getChartData';
+export { getChartData } from './getChartData'

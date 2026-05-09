@@ -1,9 +1,9 @@
-import { BottomSheetModalProvider } from '@centile-grid/ui-kit-mobile';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Stack } from 'expo-router';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { BottomSheetModalProvider } from '@centile-grid/ui-kit-mobile'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Stack } from 'expo-router'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
 const RootLayout = () => (
   <GestureHandlerRootView>
@@ -13,13 +13,13 @@ const RootLayout = () => (
       </BottomSheetModalProvider>
     </QueryClientProvider>
   </GestureHandlerRootView>
-);
+)
 
 const styles = {
   content: {
     paddingBlock: 32,
     paddingInline: 16,
   },
-};
+}
 
-export default RootLayout;
+export default RootLayout

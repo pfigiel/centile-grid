@@ -1,7 +1,7 @@
-import { handlers } from '@/api/tests/handlers';
-import { TestQueryClientProvider } from '@/test/providers/TestQueryClientProvider';
-import { renderRouter, screen, waitFor } from 'expo-router/testing-library';
-import { setupServer } from 'msw/node';
+import { handlers } from '@/api/tests/handlers'
+import { TestQueryClientProvider } from '@/test/providers/TestQueryClientProvider'
+import { renderRouter, screen, waitFor } from 'expo-router/testing-library'
+import { setupServer } from 'msw/node'
 
 const mockDataPoint = {
   age: 5,
@@ -12,55 +12,55 @@ const mockDataPoint = {
   c75: 120,
   c90: 125,
   c97: 130,
-};
+}
 
-const server = setupServer(handlers.chart.getChartData.success({ data: [mockDataPoint] }));
+const server = setupServer(handlers.chart.getChartData.success({ data: [mockDataPoint] }))
 
 const renderScreen = (url: string) =>
   renderRouter(
     { index: () => null, results: require('./index').default },
     { initialUrl: url, wrapper: TestQueryClientProvider },
-  );
+  )
 
 describe('results screen', () => {
   beforeAll(() => {
-    server.listen({ onUnhandledRequest: 'error' });
-  });
+    server.listen({ onUnhandledRequest: 'error' })
+  })
 
   afterEach(() => {
-    jest.useRealTimers();
-    server.resetHandlers();
-  });
+    jest.useRealTimers()
+    server.resetHandlers()
+  })
 
   afterAll(() => {
-    server.close();
-  });
+    server.close()
+  })
 
   it('should render height chart when height param present', async () => {
-    renderScreen('/results?gender=male&age=5&height=112');
+    renderScreen('/results?gender=male&age=5&height=112')
 
-    expect(await screen.findByText('Height (cm)')).toBeOnTheScreen();
-    expect(await screen.findByText('Age (years)')).toBeOnTheScreen();
-  });
+    expect(await screen.findByText('Height (cm)')).toBeOnTheScreen()
+    expect(await screen.findByText('Age (years)')).toBeOnTheScreen()
+  })
 
   it('should render weight chart when weight param present', async () => {
-    renderScreen('/results?gender=male&age=5&weight=20');
+    renderScreen('/results?gender=male&age=5&weight=20')
 
-    expect(await screen.findByText('Weight (kg)')).toBeOnTheScreen();
-  });
+    expect(await screen.findByText('Weight (kg)')).toBeOnTheScreen()
+  })
 
   it('should render both charts when height and weight params present', async () => {
-    renderScreen('/results?gender=male&age=5&height=112&weight=20');
+    renderScreen('/results?gender=male&age=5&height=112&weight=20')
 
-    expect(await screen.findByText('Height (cm)')).toBeOnTheScreen();
-    expect(await screen.findByText('Weight (kg)')).toBeOnTheScreen();
-  });
+    expect(await screen.findByText('Height (cm)')).toBeOnTheScreen()
+    expect(await screen.findByText('Weight (kg)')).toBeOnTheScreen()
+  })
 
   it('should navigate back to index when chart data request fails', async () => {
-    server.use(handlers.chart.getChartData.error());
+    server.use(handlers.chart.getChartData.error())
 
-    const result = renderScreen('/results?gender=male&age=5&height=112');
+    const result = renderScreen('/results?gender=male&age=5&height=112')
 
-    await waitFor(() => expect(result.getPathname()).toBe('/'));
-  });
-});
+    await waitFor(() => expect(result.getPathname()).toBe('/'))
+  })
+})

@@ -1,1 +1,1 @@
-export { useChartsData } from './useChartsData';
+export { useChartsData } from './useChartsData'

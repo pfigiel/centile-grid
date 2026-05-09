@@ -1,37 +1,37 @@
-import { useEffect, useState } from 'react';
-import { StyleProp, TextStyle } from 'react-native';
-import { TextInput } from '../TextInput';
+import { useEffect, useState } from 'react'
+import { StyleProp, TextStyle } from 'react-native'
+import { TextInput } from '../TextInput'
 
 type Props = {
-  style?: StyleProp<TextStyle>;
-  label?: string;
-  value?: string | string[] | number;
-  onChangeValue?: (value: number | undefined) => void;
-};
+  style?: StyleProp<TextStyle>
+  label?: string
+  value?: string | string[] | number
+  onChangeValue?: (value: number | undefined) => void
+}
 
 export const NumberInput = ({ style, label, value, onChangeValue }: Props) => {
-  const [stringValue, setStringValue] = useState(String(value ?? ''));
+  const [stringValue, setStringValue] = useState(String(value ?? ''))
 
   useEffect(() => {
     setStringValue((prev) => {
-      if (value === undefined) return prev === '' ? prev : '';
-      const parsed = parseFloat(prev);
-      if (!Number.isNaN(parsed) && parsed === value) return prev;
-      return String(value);
-    });
-  }, [value]);
+      if (value === undefined) return prev === '' ? prev : ''
+      const parsed = parseFloat(prev)
+      if (!Number.isNaN(parsed) && parsed === value) return prev
+      return String(value)
+    })
+  }, [value])
 
   const handleChangeText = (text: string) => {
-    setStringValue(text);
+    setStringValue(text)
     if (text === '') {
-      onChangeValue?.(undefined);
+      onChangeValue?.(undefined)
     } else {
-      const parsed = parseFloat(text);
+      const parsed = parseFloat(text)
       if (!Number.isNaN(parsed)) {
-        onChangeValue?.(parsed);
+        onChangeValue?.(parsed)
       }
     }
-  };
+  }
 
   return (
     <TextInput
@@ -41,5 +41,5 @@ export const NumberInput = ({ style, label, value, onChangeValue }: Props) => {
       onChangeText={handleChangeText}
       keyboardType="decimal-pad"
     />
-  );
-};
+  )
+}

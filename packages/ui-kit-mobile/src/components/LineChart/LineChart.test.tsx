@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react-native';
-import { ComponentProps } from 'react';
-import { LineChart } from './LineChart';
+import { render, screen } from '@testing-library/react-native'
+import { ComponentProps } from 'react'
+import { LineChart } from './LineChart'
 
-type Props = ComponentProps<typeof LineChart>;
+type Props = ComponentProps<typeof LineChart>
 
 const lineSeries: Props['lineSeries'] = [
   {
@@ -21,54 +21,54 @@ const lineSeries: Props['lineSeries'] = [
     color: '#333',
     label: 'P50',
   },
-];
+]
 
 const scatterSeries: Props['scatterSeries'] = {
   data: [{ x: 6, y: 65 }],
   color: '#e53935',
-};
+}
 
 const renderComponent = (props: Partial<Props> = {}) =>
-  render(<LineChart lineSeries={lineSeries} {...props} />);
+  render(<LineChart lineSeries={lineSeries} {...props} />)
 
 describe('LineChart', () => {
   it('should render without error when given only lineSeries', async () => {
-    renderComponent({ xLabel: 'Age' });
+    renderComponent({ xLabel: 'Age' })
 
-    expect(await screen.findByText('Age')).toBeOnTheScreen();
-  });
+    expect(await screen.findByText('Age')).toBeOnTheScreen()
+  })
 
   it('should render without error when given lineSeries and scatterSeries', async () => {
-    renderComponent({ scatterSeries, xLabel: 'Age' });
+    renderComponent({ scatterSeries, xLabel: 'Age' })
 
-    expect(await screen.findByText('Age')).toBeOnTheScreen();
-  });
+    expect(await screen.findByText('Age')).toBeOnTheScreen()
+  })
 
   it('should display xLabel when xLabel prop is provided', async () => {
-    renderComponent({ xLabel: 'Age (months)' });
+    renderComponent({ xLabel: 'Age (months)' })
 
-    expect(await screen.findByText('Age (months)')).toBeOnTheScreen();
-  });
+    expect(await screen.findByText('Age (months)')).toBeOnTheScreen()
+  })
 
   it('should not display xLabel when xLabel prop is not provided', () => {
-    renderComponent();
+    renderComponent()
 
-    expect(screen.queryByText('Age (months)')).not.toBeOnTheScreen();
-  });
+    expect(screen.queryByText('Age (months)')).not.toBeOnTheScreen()
+  })
 
   it('should display yLabel when yLabel prop is provided', async () => {
-    renderComponent({ yLabel: 'Height (cm)' });
+    renderComponent({ yLabel: 'Height (cm)' })
 
-    expect(await screen.findByText('Height (cm)')).toBeOnTheScreen();
-  });
+    expect(await screen.findByText('Height (cm)')).toBeOnTheScreen()
+  })
 
   it('should not display yLabel when yLabel prop is not provided', () => {
-    renderComponent();
+    renderComponent()
 
-    expect(screen.queryByText('Height (cm)')).not.toBeOnTheScreen();
-  });
+    expect(screen.queryByText('Height (cm)')).not.toBeOnTheScreen()
+  })
 
   it('should expose Container as a static member', () => {
-    expect(LineChart.Container).toBeDefined();
-  });
-});
+    expect(LineChart.Container).toBeDefined()
+  })
+})

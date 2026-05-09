@@ -1,10 +1,10 @@
-import type { Rule } from 'eslint';
+import type { Rule } from 'eslint'
 
 const rule: Rule.RuleModule = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: "Disallow React namespace access (e.g. React.ReactElement)",
+      description: 'Disallow React namespace access (e.g. React.ReactElement)',
       recommended: true,
     },
     messages: {
@@ -18,11 +18,11 @@ const rule: Rule.RuleModule = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       TSQualifiedName(node: any) {
         if (node.left?.name === 'React') {
-          context.report({ node, messageId: 'noReactNamespace' });
+          context.report({ node, messageId: 'noReactNamespace' })
         }
       },
-    };
+    }
   },
-};
+}
 
-export default rule;
+export default rule

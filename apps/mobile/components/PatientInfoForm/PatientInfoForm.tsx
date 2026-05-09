@@ -1,46 +1,46 @@
-import { PatientInfo } from '@/types';
-import { Button, NumberInput, Select } from '@centile-grid/ui-kit-mobile';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { StyleSheet, Text, View } from 'react-native';
+import { PatientInfo } from '@/types'
+import { Button, NumberInput, Select } from '@centile-grid/ui-kit-mobile'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { StyleSheet, Text, View } from 'react-native'
 
-const parameters = ['AGE', 'HEIGHT', 'WEIGHT'] as const;
-type Parameter = (typeof parameters)[number];
+const parameters = ['AGE', 'HEIGHT', 'WEIGHT'] as const
+type Parameter = (typeof parameters)[number]
 
-type ParameterValues = Exclude<PatientInfo, 'gender'>;
+type ParameterValues = Exclude<PatientInfo, 'gender'>
 
 type FormValues = PatientInfo & {
-  selectedParameters: Parameter[];
-};
+  selectedParameters: Parameter[]
+}
 
 type Props = {
-  onSubmit: (values: PatientInfo) => void;
-};
+  onSubmit: (values: PatientInfo) => void
+}
 
 const parameterToFieldNameMap: Record<Parameter, keyof ParameterValues> = {
   AGE: 'age',
   HEIGHT: 'height',
   WEIGHT: 'weight',
-};
+}
 
 const parameterToSelectOptionMap: Record<Parameter, string> = {
   AGE: 'Age',
   HEIGHT: 'Height',
   WEIGHT: 'Weight',
-};
+}
 
 const parameterToFieldLabelMap: Record<Parameter, string> = {
   AGE: 'Age [years]',
   HEIGHT: 'Height [cm]',
   WEIGHT: 'Weight [kg]',
-};
+}
 
 export const PatientInfoForm = ({ onSubmit }: Props) => {
-  const form = useForm<FormValues>({ defaultValues: { selectedParameters: ['AGE'] } });
+  const form = useForm<FormValues>({ defaultValues: { selectedParameters: ['AGE'] } })
 
-  const { watch, setValue } = form;
+  const { watch, setValue } = form
 
-  const selectedParameters: Parameter[] = watch('selectedParameters');
-  const availableParameters = parameters.filter((param) => !selectedParameters.includes(param));
+  const selectedParameters: Parameter[] = watch('selectedParameters')
+  const availableParameters = parameters.filter((param) => !selectedParameters.includes(param))
 
   return (
     <View style={styles.container}>
@@ -128,8 +128,8 @@ export const PatientInfoForm = ({ onSubmit }: Props) => {
         <Button onPress={form.handleSubmit(onSubmit)}>Show grids</Button>
       </FormProvider>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -182,4 +182,4 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
     marginVertical: 0,
   },
-});
+})
