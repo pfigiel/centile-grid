@@ -69,6 +69,10 @@ describe('LineChart', () => {
 
     expect(screen.queryByText('Height (cm)')).not.toBeOnTheScreen();
   });
+
+  it('should expose Container as a static member', () => {
+    expect(LineChart.Container).toBeDefined();
+  });
 });
 
 describe('Container', () => {

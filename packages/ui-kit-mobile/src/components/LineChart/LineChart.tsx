@@ -1,9 +1,11 @@
-import { matchFont } from '@shopify/react-native-skia';
+import { Text as SkiaText, matchFont } from '@shopify/react-native-skia';
 import { useMemo } from 'react';
-import { Platform, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
-import { CartesianChart, Line, Scatter, type PointsArray } from 'victory-native';
+import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { CartesianChart, Line, Scatter, type ChartBounds, type PointsArray } from 'victory-native';
+import { Container } from './Container';
 
 const FONT_FAMILY = Platform.OS === 'ios' ? 'Helvetica' : 'sans-serif';
+const LABEL_PADDING = 6;
 
 export type DataPoint = { x: number; y: number };
 
@@ -68,64 +70,69 @@ export const LineChart = ({ lineSeries, scatterSeries, xLabel, yLabel, style }: 
 
   return (
     <View style={[styles.container, style]}>
-      <View style={styles.chartRow}>
-        {yLabel !== undefined && <Text style={styles.yLabel}>{yLabel}</Text>}
-        <View style={styles.chartArea}>
-          <CartesianChart
-            data={data}
-            xKey={'x' as never}
-            yKeys={yKeys}
-            xAxis={{ font: axisFont }}
-            yAxis={[{ font: axisFont }]}
-            frame={{}}
-          >
-            {({ points }: { points: Record<string, PointsArray> }) => (
-              <>
-                {lineYKeys.map((key, i) => (
-                  <Line
-                    key={key}
-                    points={points[key]}
-                    color={
-                      lineSeries[i].color ?? DEFAULT_LINE_COLORS[i % DEFAULT_LINE_COLORS.length]
-                    }
-                    strokeWidth={1.5}
-                  />
-                ))}
-                {scatterSeries !== undefined && (
-                  <Scatter
-                    points={points[SCATTER_Y_KEY]}
-                    color={scatterSeries.color ?? DEFAULT_SCATTER_COLOR}
-                    radius={4}
-                  />
-                )}
-              </>
+      <CartesianChart
+        data={data}
+        xKey={'x' as never}
+        yKeys={yKeys}
+        xAxis={{ font: axisFont }}
+        yAxis={[{ font: axisFont }]}
+        frame={{}}
+      >
+        {({
+          points,
+          chartBounds,
+        }: {
+          points: Record<string, PointsArray>;
+          chartBounds: ChartBounds;
+        }) => (
+          <>
+            {lineYKeys.map((key, i) => (
+              <Line
+                key={key}
+                points={points[key]}
+                color={lineSeries[i].color ?? DEFAULT_LINE_COLORS[i % DEFAULT_LINE_COLORS.length]}
+                strokeWidth={1.5}
+              />
+            ))}
+            {scatterSeries !== undefined && (
+              <Scatter
+                points={points[SCATTER_Y_KEY]}
+                color={scatterSeries.color ?? DEFAULT_SCATTER_COLOR}
+                radius={4}
+              />
             )}
-          </CartesianChart>
-        </View>
-      </View>
-      {xLabel !== undefined && <Text style={styles.xLabel}>{xLabel}</Text>}
+            {yLabel !== undefined && (
+              <SkiaText
+                x={chartBounds.left + LABEL_PADDING}
+                y={chartBounds.top + 11 + LABEL_PADDING}
+                text={yLabel}
+                font={axisFont}
+              />
+            )}
+            {xLabel !== undefined && (
+              <SkiaText
+                x={
+                  chartBounds.right -
+                  (axisFont != null ? axisFont.measureText(xLabel).width : 0) -
+                  LABEL_PADDING
+                }
+                y={chartBounds.bottom - LABEL_PADDING}
+                text={xLabel}
+                font={axisFont}
+              />
+            )}
+          </>
+        )}
+      </CartesianChart>
     </View>
   );
 };
+
+LineChart.Container = Container;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignSelf: 'stretch',
-  },
-  chartRow: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  chartArea: {
-    flex: 1,
-  },
-  yLabel: {
-    transform: [{ rotate: '-90deg' }],
-    alignSelf: 'center',
-  },
-  xLabel: {
-    textAlign: 'center',
-    marginTop: 4,
   },
 });
