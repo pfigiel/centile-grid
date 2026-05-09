@@ -28,6 +28,7 @@ describe('results screen', () => {
   });
 
   afterEach(() => {
+    jest.useRealTimers();
     server.resetHandlers();
   });
 
@@ -51,10 +52,8 @@ describe('results screen', () => {
   it('should render both charts when height and weight params present', async () => {
     renderScreen('/results?gender=male&age=5&height=112&weight=20');
 
-    await waitFor(() => {
-      expect(screen.getByText('Height (cm)')).toBeOnTheScreen();
-      expect(screen.getByText('Weight (kg)')).toBeOnTheScreen();
-    });
+    expect(await screen.findByText('Height (cm)')).toBeOnTheScreen();
+    expect(await screen.findByText('Weight (kg)')).toBeOnTheScreen();
   });
 
   it('should navigate back to index when chart data request fails', async () => {

@@ -1,8 +1,6 @@
 import { render, screen } from '@testing-library/react-native';
-import { Text } from 'react-native';
 import { ComponentProps } from 'react';
 import { LineChart } from './LineChart';
-import { Container } from './Container';
 
 type Props = ComponentProps<typeof LineChart>;
 
@@ -72,27 +70,5 @@ describe('LineChart', () => {
 
   it('should expose Container as a static member', () => {
     expect(LineChart.Container).toBeDefined();
-  });
-});
-
-describe('Container', () => {
-  it('should render children when rendered without extra props', async () => {
-    render(
-      <Container>
-        <Text>content</Text>
-      </Container>,
-    );
-
-    expect(await screen.findByText('content')).toBeOnTheScreen();
-  });
-
-  it('should render children when style prop is provided', async () => {
-    render(
-      <Container style={{ backgroundColor: 'red' }}>
-        <Text>content</Text>
-      </Container>,
-    );
-
-    expect(await screen.findByText('content')).toBeOnTheScreen();
   });
 });

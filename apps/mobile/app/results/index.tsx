@@ -58,12 +58,14 @@ const ResultsScreen = () => {
       </TouchableOpacity>
       {chartData?.map((data, index) => (
         <View key={index} style={styles.chart}>
-          <LineChart
-            lineSeries={data.lineSeries}
-            scatterSeries={data.scatterSeries}
-            xLabel="Age (years)"
-            yLabel={data.parameter === 'height' ? 'Height (cm)' : 'Weight (kg)'}
-          />
+          <LineChart.Container>
+            <LineChart
+              lineSeries={data.lineSeries}
+              scatterSeries={data.scatterSeries}
+              xLabel="Age (years)"
+              yLabel={data.parameter === 'height' ? 'Height (cm)' : 'Weight (kg)'}
+            />
+          </LineChart.Container>
         </View>
       ))}
     </ScrollView>

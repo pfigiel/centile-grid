@@ -41,6 +41,6 @@ export const Button = ({
 
 const styles = StyleSheet.create({
   root: {
-    borderRadius: 4,
+    borderRadius: 8,
   },
 });
