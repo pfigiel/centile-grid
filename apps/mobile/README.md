@@ -41,6 +41,12 @@ After the build completes, install the resulting `.ipa` / `.apk` on your device 
 
 ## Running the app
 
+Before running, install Skia binaries:
+
+```bash
+npx install-skia
+```
+
 Once the development build is installed:
 
 | Command        | Platform                                               |

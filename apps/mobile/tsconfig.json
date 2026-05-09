@@ -1,7 +1,6 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": ["../../tsconfig.base.json", "expo/tsconfig.base"],
   "compilerOptions": {
-    "strict": true,
     "paths": {
       "@/*": ["./*"],
       "@centile-grid/ui-kit-mobile": ["../../packages/ui-kit-mobile/src/index.ts"],

@@ -1,38 +1,22 @@
 import { PatientInfoForm } from '@/components/PatientInfoForm';
 import { PatientInfo } from '@/types';
-import { LineChart } from '@centile-grid/ui-kit-mobile';
-import { useState } from 'react';
+import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
-const HomeScreen = () => {
-  const [patientInfo, setPatientInfo] = useState<PatientInfo>();
-
-  return (
-    <View style={styles.container}>
-      <PatientInfoForm onSubmit={setPatientInfo} />
-      {patientInfo && (
-        <LineChart
-          lineSeries={[
-            {
-              data: [
-                {
-                  x: 1,
-                  y: 70,
-                },
-                {
-                  x: 2,
-                  y: 80,
-                },
-              ],
-            },
-          ]}
-          xLabel="Age"
-          yLabel="Height"
-        />
-      )}
-    </View>
-  );
+const handleSubmit = (info: PatientInfo) => {
+  const params = new URLSearchParams();
+  if (info.gender) params.set('gender', info.gender);
+  if (info.age !== undefined) params.set('age', String(info.age));
+  if (info.height !== undefined) params.set('height', String(info.height));
+  if (info.weight !== undefined) params.set('weight', String(info.weight));
+  router.push(`/results?${params.toString()}`);
 };
+
+const HomeScreen = () => (
+  <View style={styles.container}>
+    <PatientInfoForm onSubmit={handleSubmit} />
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
