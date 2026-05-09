@@ -86,7 +86,7 @@ describe('Container', () => {
     expect(await screen.findByText('content')).toBeOnTheScreen();
   });
 
-  it('should apply additional style when style prop is provided', async () => {
+  it('should render children when style prop is provided', async () => {
     render(
       <Container style={{ backgroundColor: 'red' }}>
         <Text>content</Text>
