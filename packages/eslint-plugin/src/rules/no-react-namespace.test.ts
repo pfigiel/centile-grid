@@ -1,11 +1,11 @@
-import { RuleTester } from 'eslint';
-import rule from './no-react-namespace';
+import { RuleTester } from 'eslint'
+import rule from './no-react-namespace'
 
 const ruleTester = new RuleTester({
   languageOptions: {
     parser: require('@typescript-eslint/parser'),
   },
-});
+})
 
 ruleTester.run('no-react-namespace', rule, {
   valid: [
@@ -27,4 +27,4 @@ ruleTester.run('no-react-namespace', rule, {
       errors: [{ messageId: 'noReactNamespace' }],
     },
   ],
-});
+})

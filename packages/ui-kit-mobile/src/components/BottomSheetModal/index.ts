@@ -1,1 +1,1 @@
-export { BottomSheetModal } from './BottomSheetModal';
+export { BottomSheetModal } from './BottomSheetModal'

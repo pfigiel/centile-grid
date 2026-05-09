@@ -1,13 +1,13 @@
-import { StyleProp, StyleSheet, TextStyle } from 'react-native';
-import { TextInput as RNPTextInput } from 'react-native-paper';
+import { StyleProp, StyleSheet, TextStyle } from 'react-native'
+import { TextInput as RNPTextInput } from 'react-native-paper'
 
 type Props = {
-  style?: StyleProp<TextStyle>;
-  label?: string;
-  value?: string;
-  onChangeText?: (text: string) => void;
-  keyboardType?: 'default' | 'decimal-pad' | 'numeric' | 'email-address' | 'phone-pad';
-};
+  style?: StyleProp<TextStyle>
+  label?: string
+  value?: string
+  onChangeText?: (text: string) => void
+  keyboardType?: 'default' | 'decimal-pad' | 'numeric' | 'email-address' | 'phone-pad'
+}
 
 export const TextInput = ({ style = {}, label, value, onChangeText, keyboardType }: Props) => (
   <RNPTextInput
@@ -18,10 +18,10 @@ export const TextInput = ({ style = {}, label, value, onChangeText, keyboardType
     keyboardType={keyboardType}
     underlineStyle={{ height: 0 }}
   />
-);
+)
 
 const styles = StyleSheet.create({
   root: {
     borderRadius: 8,
   },
-});
+})

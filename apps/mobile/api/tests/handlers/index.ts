@@ -1,3 +1,3 @@
-import { getChartData } from './chart';
+import { getChartData } from './chart'
 
-export const handlers = { chart: { getChartData } };
+export const handlers = { chart: { getChartData } }

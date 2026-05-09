@@ -1,28 +1,28 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { ChartDataPointDto } from '@centile-grid/contract';
-import { ChartService } from './chart.service';
-import { CHART_REPOSITORY, IChartRepository } from './chart.repository';
+import { Test, TestingModule } from '@nestjs/testing'
+import { ChartDataPointDto } from '@centile-grid/contract'
+import { ChartService } from './chart.service'
+import { CHART_REPOSITORY, IChartRepository } from './chart.repository'
 
 describe('ChartService', () => {
-  let service: ChartService;
+  let service: ChartService
   const mockData: ChartDataPointDto[] = [
     { age: 3, c3: 90, c10: 92, c25: 94, c50: 96, c75: 98, c90: 100, c97: 102 },
-  ];
-  const mockRepo: IChartRepository = { findAll: jest.fn().mockReturnValue(mockData) };
+  ]
+  const mockRepo: IChartRepository = { findAll: jest.fn().mockReturnValue(mockData) }
 
   beforeEach(async () => {
-    jest.clearAllMocks();
+    jest.clearAllMocks()
     const module: TestingModule = await Test.createTestingModule({
       providers: [ChartService, { provide: CHART_REPOSITORY, useValue: mockRepo }],
-    }).compile();
+    }).compile()
 
-    service = module.get<ChartService>(ChartService);
-  });
+    service = module.get<ChartService>(ChartService)
+  })
 
   it('should delegate to repository when getChartData is called', () => {
-    const result = service.getChartData('female', 'height');
+    const result = service.getChartData('female', 'height')
 
-    expect(mockRepo.findAll).toHaveBeenCalledWith('female', 'height');
-    expect(result).toBe(mockData);
-  });
-});
+    expect(mockRepo.findAll).toHaveBeenCalledWith('female', 'height')
+    expect(result).toBe(mockData)
+  })
+})

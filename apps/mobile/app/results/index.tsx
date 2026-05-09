@@ -1,8 +1,8 @@
-import { useChartsData } from '@/hooks/useChartsData';
-import { GrowthParameter } from '@/types';
-import { LineChart } from '@centile-grid/ui-kit-mobile';
-import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect } from 'react';
+import { useChartsData } from '@/hooks/useChartsData'
+import { GrowthParameter } from '@/types'
+import { LineChart } from '@centile-grid/ui-kit-mobile'
+import { router, useLocalSearchParams } from 'expo-router'
+import { useEffect } from 'react'
 import {
   ActivityIndicator,
   ScrollView,
@@ -10,45 +10,45 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from 'react-native';
+} from 'react-native'
 
 type Params = {
-  gender: string;
-  age: string;
-  height?: string;
-  weight?: string;
-};
+  gender: string
+  age: string
+  height?: string
+  weight?: string
+}
 
 const ResultsScreen = () => {
-  const { gender, age, height, weight } = useLocalSearchParams<Params>();
+  const { gender, age, height, weight } = useLocalSearchParams<Params>()
 
-  const metrics: { parameter: GrowthParameter; value: number }[] = [];
+  const metrics: { parameter: GrowthParameter; value: number }[] = []
 
   if (height !== undefined) {
-    metrics.push({ parameter: 'height', value: Number(height) });
+    metrics.push({ parameter: 'height', value: Number(height) })
   }
   if (weight !== undefined) {
-    metrics.push({ parameter: 'weight', value: Number(weight) });
+    metrics.push({ parameter: 'weight', value: Number(weight) })
   }
 
   const { chartData, isLoading, isError } = useChartsData({
     gender: gender as 'male' | 'female',
     age: Number(age),
     metrics,
-  });
+  })
 
   useEffect(() => {
     if (isError) {
-      router.replace('/');
+      router.replace('/')
     }
-  }, [isError]);
+  }, [isError])
 
   if (isLoading) {
     return (
       <View style={styles.center}>
         <ActivityIndicator />
       </View>
-    );
+    )
   }
 
   return (
@@ -69,8 +69,8 @@ const ResultsScreen = () => {
         </View>
       ))}
     </ScrollView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   center: {
@@ -88,6 +88,6 @@ const styles = StyleSheet.create({
   chart: {
     height: 300,
   },
-});
+})
 
-export default ResultsScreen;
+export default ResultsScreen

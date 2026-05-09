@@ -1,7 +1,7 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactNode } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactNode } from 'react'
 
-type Props = { children: ReactNode };
+type Props = { children: ReactNode }
 
 export const TestQueryClientProvider = ({ children }: Props) => (
   <QueryClientProvider
@@ -13,4 +13,4 @@ export const TestQueryClientProvider = ({ children }: Props) => (
   >
     {children}
   </QueryClientProvider>
-);
+)

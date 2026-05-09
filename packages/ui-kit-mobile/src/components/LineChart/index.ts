@@ -1,2 +1,2 @@
-export { LineChart } from './LineChart';
-export type { LineSeries, ScatterSeries } from './LineChart';
+export { LineChart } from './LineChart'
+export type { LineSeries, ScatterSeries } from './LineChart'

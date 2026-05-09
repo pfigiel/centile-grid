@@ -1,1 +1,1 @@
-export { useGetChartsDataQuery } from './useGetChartsDataQuery';
+export { useGetChartsDataQuery } from './useGetChartsDataQuery'
