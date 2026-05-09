@@ -5,6 +5,7 @@ import { CartesianChart, Line, Scatter, type ChartBounds, type PointsArray } fro
 import { Container } from './Container';
 
 const FONT_FAMILY = Platform.OS === 'ios' ? 'Helvetica' : 'sans-serif';
+const FONT_SIZE = 11;
 const LABEL_PADDING = 6;
 
 export type DataPoint = { x: number; y: number };
@@ -66,7 +67,7 @@ const buildChartData = (lineSeriesInput: LineSeries[], scatterSeries?: ScatterSe
 
 export const LineChart = ({ lineSeries, scatterSeries, xLabel, yLabel, style }: Props) => {
   const { data, lineYKeys, yKeys } = buildChartData(lineSeries, scatterSeries);
-  const axisFont = useMemo(() => matchFont({ fontFamily: FONT_FAMILY, fontSize: 11 }), []);
+  const axisFont = useMemo(() => matchFont({ fontFamily: FONT_FAMILY, fontSize: FONT_SIZE }), []);
 
   return (
     <View style={[styles.container, style]}>
@@ -104,7 +105,7 @@ export const LineChart = ({ lineSeries, scatterSeries, xLabel, yLabel, style }: 
             {yLabel !== undefined && (
               <SkiaText
                 x={chartBounds.left + LABEL_PADDING}
-                y={chartBounds.top + 11 + LABEL_PADDING}
+                y={chartBounds.top + FONT_SIZE + LABEL_PADDING}
                 text={yLabel}
                 font={axisFont}
               />
