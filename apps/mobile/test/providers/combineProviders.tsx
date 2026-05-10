@@ -1,4 +1,3 @@
-// apps/mobile/test/providers/combineProviders.tsx
 import { ComponentType, ReactNode } from 'react'
 
 type Provider = ComponentType<{ children: ReactNode }>
