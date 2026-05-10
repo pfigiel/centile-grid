@@ -8,10 +8,12 @@ i18n.use(initReactI18next).init({
   resources: { en: { translation: en } },
 })
 
+/* eslint-disable @typescript-eslint/consistent-type-definitions */
 declare module 'i18next' {
-  type CustomTypeOptions = {
+  interface CustomTypeOptions {
     resources: { translation: typeof en }
   }
 }
+/* eslint-enable @typescript-eslint/consistent-type-definitions */
 
 export default i18n
