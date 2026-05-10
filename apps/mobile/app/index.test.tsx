@@ -1,12 +1,9 @@
+import '@/i18n'
 import { userEvent } from '@testing-library/react-native'
 import { renderRouter, screen, waitFor } from 'expo-router/testing-library'
-import { TestTranslationsProvider } from '@/test/providers/TestTranslationsProvider'
 
 const renderScreen = () =>
-  renderRouter(
-    { index: require('./index').default, results: () => null },
-    { initialUrl: '/', wrapper: TestTranslationsProvider },
-  )
+  renderRouter({ index: require('./index').default, results: () => null }, { initialUrl: '/' })
 
 describe('home screen', () => {
   it('should navigate to results with multiple params when form submitted with multiple parameters', async () => {
