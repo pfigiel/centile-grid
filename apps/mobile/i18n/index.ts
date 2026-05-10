@@ -6,6 +6,7 @@ i18n.use(initReactI18next).init({
   lng: 'en',
   fallbackLng: 'en',
   resources: { en: { translation: en } },
+  returnNull: false,
 })
 
 /* eslint-disable @typescript-eslint/consistent-type-definitions */
