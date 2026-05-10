@@ -1,5 +1,7 @@
 import { handlers } from '@/api/tests/handlers'
 import { TestQueryClientProvider } from '@/test/providers/TestQueryClientProvider'
+import { TestTranslationsProvider } from '@/test/providers/TestTranslationsProvider'
+import { combineProviders } from '@/test/providers/combineProviders'
 import { renderRouter, screen, waitFor } from 'expo-router/testing-library'
 import { setupServer } from 'msw/node'
 
@@ -16,10 +18,12 @@ const mockDataPoint = {
 
 const server = setupServer(handlers.chart.getChartData.success({ data: [mockDataPoint] }))
 
+const TestProviders = combineProviders(TestQueryClientProvider, TestTranslationsProvider)
+
 const renderScreen = (url: string) =>
   renderRouter(
     { index: () => null, results: require('./index').default },
-    { initialUrl: url, wrapper: TestQueryClientProvider },
+    { initialUrl: url, wrapper: TestProviders },
   )
 
 describe('results screen', () => {

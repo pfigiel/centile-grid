@@ -3,6 +3,7 @@ import { GrowthParameter } from '@/types'
 import { LineChart } from '@centile-grid/ui-kit-mobile'
 import { router, useLocalSearchParams } from 'expo-router'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   ActivityIndicator,
   ScrollView,
@@ -20,6 +21,7 @@ type Params = {
 }
 
 const ResultsScreen = () => {
+  const { t } = useTranslation()
   const { gender, age, height, weight } = useLocalSearchParams<Params>()
 
   const metrics: { parameter: GrowthParameter; value: number }[] = []
@@ -54,7 +56,7 @@ const ResultsScreen = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-        <Text>Back</Text>
+        <Text>{t('results.back')}</Text>
       </TouchableOpacity>
       {chartData?.map((data, index) => (
         <View key={index} style={styles.chart}>
@@ -62,8 +64,10 @@ const ResultsScreen = () => {
             <LineChart
               lineSeries={data.lineSeries}
               scatterSeries={data.scatterSeries}
-              xLabel="Age (years)"
-              yLabel={data.parameter === 'height' ? 'Height (cm)' : 'Weight (kg)'}
+              xLabel={t('results.xLabel')}
+              yLabel={
+                data.parameter === 'height' ? t('results.heightYLabel') : t('results.weightYLabel')
+              }
             />
           </LineChart.Container>
         </View>
