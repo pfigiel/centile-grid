@@ -1,3 +1,4 @@
+import '@/i18n'
 import { BottomSheetModalProvider } from '@centile-grid/ui-kit-mobile'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Stack } from 'expo-router'

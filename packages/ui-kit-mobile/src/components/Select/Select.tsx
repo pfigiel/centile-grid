@@ -96,8 +96,7 @@ const styles = StyleSheet.create({
   },
   toggle: {
     backgroundColor: 'rgba(231, 224, 236, 1)',
-    borderTopLeftRadius: 4,
-    borderTopRightRadius: 4,
+    borderRadius: 8,
     minHeight: 56,
     paddingTop: 28,
     paddingBottom: 8,

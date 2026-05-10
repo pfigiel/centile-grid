@@ -1,6 +1,7 @@
 import { PatientInfo } from '@/types'
 import { Button, NumberInput, Select } from '@centile-grid/ui-kit-mobile'
 import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { StyleSheet, Text, View } from 'react-native'
 
 const parameters = ['AGE', 'HEIGHT', 'WEIGHT'] as const
@@ -22,19 +23,8 @@ const parameterToFieldNameMap: Record<Parameter, keyof ParameterValues> = {
   WEIGHT: 'weight',
 }
 
-const parameterToSelectOptionMap: Record<Parameter, string> = {
-  AGE: 'Age',
-  HEIGHT: 'Height',
-  WEIGHT: 'Weight',
-}
-
-const parameterToFieldLabelMap: Record<Parameter, string> = {
-  AGE: 'Age [years]',
-  HEIGHT: 'Height [cm]',
-  WEIGHT: 'Weight [kg]',
-}
-
 export const PatientInfoForm = ({ onSubmit }: Props) => {
+  const { t } = useTranslation()
   const form = useForm<FormValues>({ defaultValues: { selectedParameters: ['AGE'] } })
 
   const { watch, setValue } = form
@@ -42,13 +32,24 @@ export const PatientInfoForm = ({ onSubmit }: Props) => {
   const selectedParameters: Parameter[] = watch('selectedParameters')
   const availableParameters = parameters.filter((param) => !selectedParameters.includes(param))
 
+  const parameterToSelectOptionMap: Record<Parameter, string> = {
+    AGE: t('patientInfoForm.ageOption'),
+    HEIGHT: t('patientInfoForm.heightOption'),
+    WEIGHT: t('patientInfoForm.weightOption'),
+  }
+
+  const parameterToFieldLabelMap: Record<Parameter, string> = {
+    AGE: t('patientInfoForm.ageLabel'),
+    HEIGHT: t('patientInfoForm.heightLabel'),
+    WEIGHT: t('patientInfoForm.weightLabel'),
+  }
+
   return (
     <View style={styles.container}>
       <FormProvider {...form}>
         <View style={styles.inputsContainer}>
-          <Text style={styles.title}>Enter patient data</Text>
           <View>
-            <Text style={styles.sectionLabel}>Gender</Text>
+            <Text style={styles.sectionLabel}>{t('patientInfoForm.gender')}</Text>
             <View style={styles.genderSelector}>
               <Controller<FormValues>
                 name="gender"
@@ -59,14 +60,14 @@ export const PatientInfoForm = ({ onSubmit }: Props) => {
                       variant={field.value === 'male' ? 'primary' : 'secondary'}
                       onPress={() => field.onChange('male')}
                     >
-                      Boy
+                      {t('patientInfoForm.boy')}
                     </Button>
                     <Button
                       style={styles.genderSelectorButton}
                       variant={field.value === 'female' ? 'primary' : 'secondary'}
                       onPress={() => field.onChange('female')}
                     >
-                      Girl
+                      {t('patientInfoForm.girl')}
                     </Button>
                   </>
                 )}
@@ -75,7 +76,7 @@ export const PatientInfoForm = ({ onSubmit }: Props) => {
           </View>
           {selectedParameters.length > 0 && (
             <View>
-              <Text style={styles.sectionLabel}>Parameters</Text>
+              <Text style={styles.sectionLabel}>{t('patientInfoForm.parameters')}</Text>
               <View style={styles.paramRows}>
                 {selectedParameters.map((param) => (
                   <View style={styles.paramRow} key={param}>
@@ -117,7 +118,7 @@ export const PatientInfoForm = ({ onSubmit }: Props) => {
             render={({ field }) => (
               <Select
                 disabled={availableParameters.length === 0}
-                label="Add parameter"
+                label={t('patientInfoForm.addParameter')}
                 options={availableParameters}
                 onSelect={(value) => field.onChange([...field.value, value])}
                 renderValue={(value) => parameterToSelectOptionMap[value]}
@@ -125,7 +126,7 @@ export const PatientInfoForm = ({ onSubmit }: Props) => {
             )}
           />
         </View>
-        <Button onPress={form.handleSubmit(onSubmit)}>Show grids</Button>
+        <Button onPress={form.handleSubmit(onSubmit)}>{t('patientInfoForm.showGrids')}</Button>
       </FormProvider>
     </View>
   )
@@ -139,9 +140,6 @@ const styles = StyleSheet.create({
   },
   inputsContainer: {
     gap: 32,
-  },
-  title: {
-    fontSize: 24,
   },
   sectionLabel: {
     marginBottom: 8,

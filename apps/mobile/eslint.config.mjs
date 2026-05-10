@@ -1,12 +1,12 @@
-import centileGridPlugin from '@centile-grid/eslint-plugin';
-import expoConfig from 'eslint-config-expo/flat.js';
-import prettierConfig from 'eslint-config-prettier';
-import preferArrow from 'eslint-plugin-prefer-arrow';
-import { defineConfig } from 'eslint/config';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import centileGridPlugin from '@centile-grid/eslint-plugin'
+import expoConfig from 'eslint-config-expo/flat.js'
+import prettierConfig from 'eslint-config-prettier'
+import preferArrow from 'eslint-plugin-prefer-arrow'
+import { defineConfig } from 'eslint/config'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const tsconfigRootDir = dirname(fileURLToPath(import.meta.url));
+const tsconfigRootDir = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig([
   expoConfig,
@@ -28,6 +28,7 @@ export default defineConfig([
     },
     rules: {
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/no-require-imports': 'error',
       'arrow-body-style': ['error', 'as-needed'],
       'prefer-arrow/prefer-arrow-functions': [
         'error',
@@ -42,4 +43,4 @@ export default defineConfig([
   {
     ignores: ['dist/*'],
   },
-]);
+])

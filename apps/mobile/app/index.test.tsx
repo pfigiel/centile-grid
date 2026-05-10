@@ -1,8 +1,8 @@
 import { userEvent } from '@testing-library/react-native'
 import { renderRouter, screen, waitFor } from 'expo-router/testing-library'
+import page from './index'
 
-const renderScreen = () =>
-  renderRouter({ index: require('./index').default, results: () => null }, { initialUrl: '/' })
+const renderScreen = () => renderRouter({ index: page, results: () => null }, { initialUrl: '/' })
 
 describe('home screen', () => {
   it('should navigate to results with multiple params when form submitted with multiple parameters', async () => {

@@ -23,5 +23,7 @@ export const TextInput = ({ style = {}, label, value, onChangeText, keyboardType
 const styles = StyleSheet.create({
   root: {
     borderRadius: 8,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
   },
 })
