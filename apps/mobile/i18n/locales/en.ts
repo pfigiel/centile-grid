@@ -1,6 +1,5 @@
 export default {
   patientInfoForm: {
-    title: 'Enter patient data',
     gender: 'Gender',
     boy: 'Boy',
     girl: 'Girl',

@@ -48,7 +48,6 @@ export const PatientInfoForm = ({ onSubmit }: Props) => {
     <View style={styles.container}>
       <FormProvider {...form}>
         <View style={styles.inputsContainer}>
-          <Text style={styles.title}>{t('patientInfoForm.title')}</Text>
           <View>
             <Text style={styles.sectionLabel}>{t('patientInfoForm.gender')}</Text>
             <View style={styles.genderSelector}>
@@ -141,9 +140,6 @@ const styles = StyleSheet.create({
   },
   inputsContainer: {
     gap: 32,
-  },
-  title: {
-    fontSize: 24,
   },
   sectionLabel: {
     marginBottom: 8,
