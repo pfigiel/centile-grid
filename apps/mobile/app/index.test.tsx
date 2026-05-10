@@ -1,4 +1,3 @@
-import '@/i18n'
 import { userEvent } from '@testing-library/react-native'
 import { renderRouter, screen, waitFor } from 'expo-router/testing-library'
 

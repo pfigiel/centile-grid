@@ -1,5 +1,4 @@
 import { handlers } from '@/api/tests/handlers'
-import '@/i18n'
 import { TestQueryClientProvider } from '@/test/providers/TestQueryClientProvider'
 import { renderRouter, screen, waitFor } from 'expo-router/testing-library'
 import { setupServer } from 'msw/node'
