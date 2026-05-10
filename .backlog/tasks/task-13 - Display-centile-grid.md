@@ -1,13 +1,13 @@
 ---
 id: TASK-13
 title: Display centile grid
-status: In Progress
+status: Done
 assignee: []
 created_date: '2026-05-07 17:14'
-updated_date: '2026-05-07 17:14'
+updated_date: '2026-05-09 21:45'
 labels: []
 dependencies: []
-ordinal: 1000
+ordinal: 13000
 ---
 
 ## Description

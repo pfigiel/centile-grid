@@ -1,12 +1,13 @@
 ---
 id: TASK-15
 title: Remove semicolons
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-05-09 19:43'
-updated_date: '2026-05-09 21:11'
+updated_date: '2026-05-09 21:45'
 labels: []
 dependencies: []
+ordinal: 14000
 ---
 
 ## Description
