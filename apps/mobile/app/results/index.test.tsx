@@ -2,6 +2,7 @@ import { handlers } from '@/api/tests/handlers'
 import { TestQueryClientProvider } from '@/test/providers/TestQueryClientProvider'
 import { renderRouter, screen, waitFor } from 'expo-router/testing-library'
 import { setupServer } from 'msw/node'
+import page from './index'
 
 const mockDataPoint = {
   age: 5,
@@ -18,7 +19,7 @@ const server = setupServer(handlers.chart.getChartData.success({ data: [mockData
 
 const renderScreen = (url: string) =>
   renderRouter(
-    { index: () => null, results: require('./index').default },
+    { index: () => null, results: page },
     { initialUrl: url, wrapper: TestQueryClientProvider },
   )
 

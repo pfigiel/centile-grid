@@ -10,12 +10,11 @@ i18n.use(initReactI18next).init({
   returnNull: false,
 })
 
-/* eslint-disable @typescript-eslint/consistent-type-definitions */
 declare module 'i18next' {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface CustomTypeOptions {
     resources: { translation: typeof en }
   }
 }
-/* eslint-enable @typescript-eslint/consistent-type-definitions */
 
 export default i18n
