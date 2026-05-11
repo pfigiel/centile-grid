@@ -1,3 +1,4 @@
+import { getCentileLabel } from '@/utils/getCentileLabel/getCentileLabel'
 import { useChartsData } from '@/hooks/useChartsData'
 import { GrowthParameter } from '@/types'
 import { LineChart } from '@centile-grid/ui-kit-mobile'
@@ -25,13 +26,8 @@ const ResultsScreen = () => {
   const { gender, age, height, weight } = useLocalSearchParams<Params>()
 
   const metrics: { parameter: GrowthParameter; value: number }[] = []
-
-  if (height !== undefined) {
-    metrics.push({ parameter: 'height', value: Number(height) })
-  }
-  if (weight !== undefined) {
-    metrics.push({ parameter: 'weight', value: Number(weight) })
-  }
+  if (height !== undefined) metrics.push({ parameter: 'height', value: Number(height) })
+  if (weight !== undefined) metrics.push({ parameter: 'weight', value: Number(weight) })
 
   const { chartData, isLoading, isError } = useChartsData({
     gender: gender as 'male' | 'female',
@@ -40,9 +36,7 @@ const ResultsScreen = () => {
   })
 
   useEffect(() => {
-    if (isError) {
-      router.replace('/')
-    }
+    if (isError) router.replace('/')
   }, [isError])
 
   if (isLoading) {
@@ -58,6 +52,22 @@ const ResultsScreen = () => {
       <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
         <Text>{t('results.back')}</Text>
       </TouchableOpacity>
+      <View style={styles.centileSection}>
+        {chartData?.map((data, index) => (
+          <View key={index} style={styles.centileRow}>
+            <Text>
+              {data.parameter === 'height' ? t('results.heightLabel') : t('results.weightLabel')}
+            </Text>
+            <Text>
+              {getCentileLabel(
+                data.lineSeries.map((ls) => ls.data),
+                Number(age),
+                metrics[index].value,
+              )}
+            </Text>
+          </View>
+        ))}
+      </View>
       {chartData?.map((data, index) => (
         <View key={index} style={styles.chart}>
           <LineChart.Container>
@@ -88,6 +98,13 @@ const styles = StyleSheet.create({
   },
   backButton: {
     paddingVertical: 8,
+  },
+  centileSection: {
+    gap: 4,
+  },
+  centileRow: {
+    flexDirection: 'row',
+    gap: 16,
   },
   chart: {
     height: 300,
