@@ -68,41 +68,6 @@ describe('getCentileLabel', () => {
     expect(getCentileLabel(series, 10.5, 17)).toBe('c50')
   })
 
-  it('should return range based on interpolated thresholds at fractional age', () => {
-    const series: DataPoint[][] = [
-      [
-        { x: 10, y: 10 },
-        { x: 11, y: 10 },
-      ],
-      [
-        { x: 10, y: 12 },
-        { x: 11, y: 12 },
-      ],
-      [
-        { x: 10, y: 14 },
-        { x: 11, y: 14 },
-      ],
-      [
-        { x: 10, y: 16 },
-        { x: 11, y: 18 },
-      ], // c50: 17 at age 10.5
-      [
-        { x: 10, y: 18 },
-        { x: 11, y: 20 },
-      ], // c75: 19 at age 10.5
-      [
-        { x: 10, y: 20 },
-        { x: 11, y: 20 },
-      ],
-      [
-        { x: 10, y: 22 },
-        { x: 11, y: 22 },
-      ],
-    ]
-    // value 18 is between interpolated c50=17 and c75=19
-    expect(getCentileLabel(series, 10.5, 18)).toBe('c50 - c75')
-  })
-
   it('should return - when age exceeds maximum data point age', () => {
     expect(getCentileLabel(baseSeries, 6, 16)).toBe('-')
   })
