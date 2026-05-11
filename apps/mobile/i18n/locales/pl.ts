@@ -18,5 +18,7 @@ export default {
     xLabel: 'Wiek (lata)',
     heightYLabel: 'Wzrost (cm)',
     weightYLabel: 'Waga (kg)',
+    heightLabel: 'Wzrost',
+    weightLabel: 'Waga',
   },
 }
