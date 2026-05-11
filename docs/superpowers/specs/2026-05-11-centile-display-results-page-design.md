@@ -18,28 +18,30 @@ Three independent layers with no coupling between them.
 Pure function:
 
 ```ts
-getCentileLabel(points: ChartDataPointDto[], age: number, value: number): string
+getCentileLabel(lineSeries: LineSeries[], age: number, value: number): string
 ```
+
+`lineSeries` is the array already present in `ChartData`. It contains 7 series in fixed order matching `CENTILE_KEYS` (c3 → c97), each with `data: DataPoint[]` where `x = age, y = centile value`.
 
 **Algorithm:**
 
-- Sort points by age
-- If age matches a data point exactly: use that point's centile values directly
-- If age falls between two points: linear interpolation
-- If age is outside the data range: linear extrapolation using the two nearest points
+- For each series, find the data point at the given age or interpolate linearly between the two nearest points
+- If age is outside the range of data points in any series: return `'-'`
 - Compare value against resolved centile thresholds:
   - `value < c3` → `'< c3'`
   - `value > c97` → `'> c97'`
-  - `value === centile[key]` → `'c50'` (exact match)
-  - `value` between two centiles → `'c50 - c75'` (range)
+  - `value === centile[key]` → e.g. `'c50'` (exact match)
+  - `value` between two centiles → e.g. `'c50 - c75'` (range)
+
+Note: age-out-of-range should never occur in practice — it will be prevented by form-level validation in the future. The `'-'` fallback is a safety net only.
 
 ### 2. `useChartsData` hook
 
-**Change:** Add `points: ChartDataPointDto[]` field to the `ChartData` type and populate it from the raw query result. No other changes.
+No changes.
 
 ### 3. Results screen
 
-Reads `chartData[i].points` and calls `getCentileLabel(points, age, value)` for each metric. Renders a centile section above the charts.
+Calls `getCentileLabel(chartData[i].lineSeries, age, value)` for each metric. Renders the centile section above the charts.
 
 ## UI
 
@@ -77,8 +79,8 @@ Centile strings (`c50`, `c50 - c75`, `< c3`, `> c97`) are technical notation —
 - Returns `> c97` when value is above c97
 - Interpolates thresholds when age falls between data points
 - Returns range based on interpolated thresholds at fractional age
-- Extrapolates when age exceeds maximum data point age
-- Extrapolates when age is below minimum data point age
+- Returns `'-'` when age exceeds maximum data point age
+- Returns `'-'` when age is below minimum data point age
 
 ### Results screen tests (`app/results/index.test.tsx`)
 
