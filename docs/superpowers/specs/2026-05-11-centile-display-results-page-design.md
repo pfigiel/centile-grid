@@ -18,10 +18,10 @@ Three independent layers with no coupling between them.
 Pure function:
 
 ```ts
-getCentileLabel(lineSeries: LineSeries[], age: number, value: number): string
+getCentileLabel(series: DataPoint[][], age: number, value: number): string
 ```
 
-`lineSeries` is the array already present in `ChartData`. It contains 7 series in fixed order matching `CENTILE_KEYS` (c3 → c97), each with `data: DataPoint[]` where `x = age, y = centile value`.
+`series` is `chartData[i].lineSeries.map(ls => ls.data)`. It has exactly 7 elements in fixed order matching `CENTILE_KEYS` (c3 → c97), each a `DataPoint[]` where `x = age, y = centile value`. The util has no dependency on `LineSeries`.
 
 **Algorithm:**
 
@@ -41,7 +41,7 @@ No changes.
 
 ### 3. Results screen
 
-Calls `getCentileLabel(chartData[i].lineSeries, age, value)` for each metric. Renders the centile section above the charts.
+Calls `getCentileLabel(chartData[i].lineSeries.map(ls => ls.data), age, value)` for each metric. Renders the centile section above the charts.
 
 ## UI
 
@@ -60,8 +60,8 @@ New keys added under `results` in both `en.ts` and `pl.ts`:
 
 ```ts
 results: {
-  heightLabel: 'Height',   // pl: 'Wysokość'
-  weightLabel: 'Weight',   // pl: 'Waga'
+  heightLabel: 'Height',
+  weightLabel: 'Weight',
 }
 ```
 
