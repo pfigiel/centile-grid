@@ -64,4 +64,27 @@ describe('results screen', () => {
 
     await waitFor(() => expect(result.getPathname()).toBe('/'))
   })
+
+  it('should render centile label when height param present', async () => {
+    renderScreen('/results?gender=male&age=5&height=112')
+
+    expect(await screen.findByText('Height')).toBeOnTheScreen()
+    expect(await screen.findByText('c25 - c50')).toBeOnTheScreen()
+  })
+
+  it('should render centile label when weight param present', async () => {
+    renderScreen('/results?gender=male&age=5&weight=20')
+
+    expect(await screen.findByText('Weight')).toBeOnTheScreen()
+    expect(await screen.findByText('< c3')).toBeOnTheScreen()
+  })
+
+  it('should render centile labels for both params when both present', async () => {
+    renderScreen('/results?gender=male&age=5&height=112&weight=20')
+
+    expect(await screen.findByText('Height')).toBeOnTheScreen()
+    expect(await screen.findByText('c25 - c50')).toBeOnTheScreen()
+    expect(await screen.findByText('Weight')).toBeOnTheScreen()
+    expect(await screen.findByText('< c3')).toBeOnTheScreen()
+  })
 })
