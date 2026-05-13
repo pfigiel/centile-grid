@@ -5,9 +5,11 @@ on:
     branches:
       - main
     paths:
-      - "apps/backend/**"
-      - "packages/contract/**"
-      - ".github/workflows/deploy-backend.yml"
+      - 'apps/backend/**'
+      - 'packages/contract/**'
+      - '.github/workflows/deploy-backend.yml'
+      - '!packages/contract/**/*.md'
+      - '!apps/backend/**/*.md'
 
 permissions:
   id-token: write
