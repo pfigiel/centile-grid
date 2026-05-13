@@ -20,7 +20,8 @@ export class CsvChartRepository implements IChartRepository {
     for (const gender of GENDERS) {
       for (const parameter of PARAMETERS) {
         const key = `${gender}_${parameter}`
-        const filePath = path.join(__dirname, '..', 'data', `${key}.csv`)
+        const dataDir = process.env.DATA_DIR ?? path.join(__dirname, '..', 'data')
+        const filePath = path.join(dataDir, `${key}.csv`)
         const content = fs.readFileSync(filePath, 'utf-8')
         this.cache.set(key, this.parseRows(content))
       }

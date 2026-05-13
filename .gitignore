@@ -20,6 +20,10 @@ pnpm-debug.log*
 # turbo
 .turbo
 
+# serverless framework
+.serverless/
+.esbuild/
+
 # worktrees
 .worktrees
 
